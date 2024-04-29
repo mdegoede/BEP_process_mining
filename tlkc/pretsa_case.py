@@ -10,9 +10,6 @@ from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 import math
 from pm4py.objects import log
 
-import time
-start_time = time.time()
-
 class TrieNode(object):
     """
     Our trie node implementation. Very basic. but does the job
@@ -498,7 +495,3 @@ for folder_path in ['D:\logs\simple', 'D:\logs\complex']:
                         print(privacy_aware_log_path + " has been exported!")
         except:
             this_is_a_folder = 1
-
-end_time = time.time()
-execution_time = end_time - start_time
-print(f"The program took {execution_time:.2f} seconds to execute.")

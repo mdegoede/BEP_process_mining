@@ -1,7 +1,7 @@
 from datetime import datetime
 from pm4py.objects.log.importer.xes import importer as xes_importer_factory
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
-from p_privacy_metadata.privacyExtension import privacyExtension
+from tlkc.p_privacy_metadata.privacyExtension import privacyExtension
 from . import Anonymizer
 import os
 

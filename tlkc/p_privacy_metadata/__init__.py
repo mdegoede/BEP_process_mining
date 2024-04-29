@@ -1,4 +1,4 @@
-from p_privacy_metadata import ELA, privacyExtension
+from tlkc.p_privacy_metadata import ELA, privacyExtension
 
 __name__ = 'p_privacy_metadata'
 __version__ = '0.0.4'

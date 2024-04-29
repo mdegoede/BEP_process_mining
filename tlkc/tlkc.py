@@ -3,12 +3,8 @@ from pm4py.objects.log.importer.xes import importer as xes_importer_factory
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 #import importer as xes_importer_factory
 #import exporter as xes_exporter
-from p_privacy_metadata.privacyExtension import privacyExtension
-from p_tlkc_privacy import Anonymizer
-import os
-import time
-
-start_time = time.time()
+from tlkc.p_privacy_metadata.privacyExtension import privacyExtension
+from tlkc.p_tlkc_privacy import Anonymizer
 
 class privacyPreserving(object):
     '''
@@ -130,41 +126,3 @@ class privacyPreserving(object):
         privacy = privacyExtension(log, prefix, uri)
         privacy.set_anonymizer('suppression', 'event', 'event')
 
-for folder_path in ['D:\logs\simple', 'data\logs\complex']:
-    files = os.listdir(folder_path)
-
-    for file in files:
-        print(file)
-        try:
-            path = os.path.join(folder_path, file)
-            event_log = path
-            #event_log = r"C:\Users\20212324\PycharmProjects\pm4py_copy-core\data\SepsisCases-EventLog.xes"
-            #event_log = "D:\logs\complex\XOR2_1000.xes"
-            #bk = ['set', 'multiset', 'sequence', 'relative']
-            bk = ['set']
-            settings = [[2, 10, 0.5], [4, 45, 0.35], [6, 80, 0.2]]
-            for bkt in bk:
-                for str_setting in settings:
-                    L = [str_setting[0]] # power of background knowledge
-                    C = [str_setting[2]] # the bound of confidence regarding the sensitive attribute values in an equivalence class
-                    K = [str_setting[1]] # k in the k-anonymity definition
-                    K2 = [0.9] # minimum support threshold Θ?--> each item must occur in K2*nr_traces or more transactions
-                    # sensitive = ['creator']
-                    sensitive = [] # sensitive case attributes
-                    T = ["hours"] # seconds, minutes, hours, days; nauwkeurigheid van tijd in privacy log; accuracy of timestamps in the privacy-aware event log
-                    cont = []
-                    bk_type = bkt #set, multiset, sequence, relative; type of background knowledge
-
-                    privacy_aware_log_dir = "xes_results"
-                    privacy_aware_log_path = event_log
-
-                    pp = privacyPreserving(event_log, "example")
-                    result = pp.apply(T, L, K, C, K2, sensitive, cont, bk_type, privacy_aware_log_dir, privacy_aware_log_path, file)
-
-                    print(result)
-        except:
-            this_is_a_folder = 1
-
-end_time = time.time()
-execution_time = end_time - start_time
-print(f"The program took {execution_time:.2f} seconds to execute.")
