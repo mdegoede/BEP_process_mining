@@ -215,3 +215,5 @@ for folder_path in maps:
         print(save_path)
         #pm4py_copy.view_petri_net (petri_net , initial_marking , final_marking , format='svg')
         pm4py.write_pnml(petri_net, initial_marking, final_marking, save_path)
+        save_path2 = "CalculateGED" + file.replace(".xes", ".pnml")
+        pm4py.write_pnml(petri_net, initial_marking, final_marking, save_path2)
