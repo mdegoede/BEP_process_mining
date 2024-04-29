@@ -6,7 +6,7 @@ import numpy as np
 from pm4py.objects.log import obj as event_log
 from scipy.optimize import linear_sum_assignment
 
-from levenshtein import levenshtein as levenshtein
+from PRIPEL_master.PRIPEL_master.levenshtein import levenshtein as levenshtein
 
 
 class TraceMatcher:
