@@ -1,5 +1,5 @@
 start with original logs in data\logs\simple (e.g. XOR1_1000.xes), and data\logs\complex (e.g. XOR2_1000.xes).
-(anonymize.py) then anonymizes it with tlkc, priple, pretsacase, and stores it in e.g. data\logs\simple\tlkc.
+(anonymize.py) then anonymizes it with tlkc, pripel, pretsacase, and stores it in e.g. data\logs\simple\tlkc.
 (anonymize.py) then makes anonymized logs pnml and stores it in e.g. data\pnml_nets\simple\XOR\tlkc, or data\pnml_nets\complex\XOR\tlkc. also in CalculateGED.
 (compute_GED.py) then makes original logs pnml and stores it in data\pnml_nets\simple or data\pnml_nets\complex. also in CalculateGED.
 (compute_GED.py) then calculates GED between them and stores result as a df in CalculateGED\geds\geds_df.csv.

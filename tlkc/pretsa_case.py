@@ -116,12 +116,12 @@ class PRETSAcase:
                     visited.add(node)
                     stack.extend(node.children)
                 elif not node.root:
-                    PRETSAcase.updateAncestors(root, node)
-                    PRETSAcase.prune(root, node)
+                    self.updateAncestors(root, node)
+                    self.prune(root, node)
                     t_prime = {}
                     for key in node.dict_log.keys():
-                        t_prime[key] = {'trace': PRETSAcase.findMostSimilar(root,node,node.dict_log[key])}
-                    PRETSAcase.reconstructTree(root,t_prime)
+                        t_prime[key] = {'trace': self.findMostSimilar(root,node,node.dict_log[key])}
+                    self.reconstructTree(root,t_prime)
                     has_changes = True
                 else:
                     stack.extend(node.children)
@@ -130,7 +130,7 @@ class PRETSAcase:
     def check(self, root,k):
         has_changes = True
         while has_changes:
-            has_changes = PRETSAcase.dfs(root,k)
+            has_changes = self.dfs(root,k)
         return root
 
 
@@ -152,12 +152,12 @@ class PRETSAcase:
 
     def findMostSimilar(self, root,node,dict_key):
         parent = node.parent
-        traces_parent = PRETSAcase.get_traces(root,parent.dict_log)
+        traces_parent = self.get_traces(root,parent.dict_log)
         dist = math.inf
         trace = dict_key['trace']
         candidate = []
         for trace_candidate in traces_parent:
-            dist_cand = PRETSAcase.distance(root,trace,trace_candidate)
+            dist_cand = self.distance(root,trace,trace_candidate)
             if dist_cand < dist:
                 dist = dist_cand
                 candidate = trace_candidate
@@ -187,13 +187,13 @@ class PRETSAcase:
 
     def reconstructTree(self, root,t_prime):
         for key in list(t_prime.keys()):
-            PRETSAcase.add(root, {key: t_prime[key]})
+            self.add(root, {key: t_prime[key]})
 
 
     def create_Tree(self, simple_log):
         root = TrieNode([],root_bool=True)
         for key in simple_log.keys():
-            PRETSAcase.add(root, {key: simple_log[key]})
+            self.add(root, {key: simple_log[key]})
         return root
 
 
@@ -233,11 +233,11 @@ class PRETSAcase:
         return logsimple, traces, sensitives
 
     def suppress_k_annonymity(self, log,k,sensitive,t):
-        logsimple,traces,sensitives = PRETSAcase.simplify_without_time_count(log,sensitive)
-        root = PRETSAcase.create_Tree(logsimple)
-        PRETSAcase.check(root,k)
-        checked_log = PRETSAcase.get_leaf_nodes(root)
-        log, d, d_l = PRETSAcase.createEventLog(log,checked_log,t)
+        logsimple,traces,sensitives = self.simplify_without_time_count(log,sensitive)
+        root = self.create_Tree(logsimple)
+        self.check(root,k)
+        checked_log = self.get_leaf_nodes(root)
+        log, d, d_l = self.createEventLog(log,checked_log,t)
         return log, d, d_l
 
     def createEventLog(self, log,simplifiedlog,t):
@@ -264,7 +264,7 @@ class PRETSAcase:
                             timedif = log[i][j]['time:timestamp'] - starttime
                             years = int(timedif.days / 365)
                             daystime = timedif.days - years * 365
-                            month, days = PRETSAcase.month_translate(daystime)
+                            month, days = self.month_translate(daystime)
                             sectim = timedif.seconds
                             # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                             hours = int(sectim / 3600)
@@ -283,7 +283,7 @@ class PRETSAcase:
                             timedif = log[i][j]['time:timestamp'] - starttime
                             years = int(timedif.days / 365)
                             daystime = timedif.days - years * 365
-                            month, days = PRETSAcase.month_translate(daystime)
+                            month, days = self.month_translate(daystime)
                             sectim = timedif.seconds
                             # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                             hours = int(sectim / 3600)
@@ -301,7 +301,7 @@ class PRETSAcase:
                             timedif = log[i][j]['time:timestamp'] - starttime
                             years = int(timedif.days / 365)
                             daystime = timedif.days - years * 365
-                            month, days = PRETSAcase.month_translate(daystime)
+                            month, days = self.month_translate(daystime)
                             sectim = timedif.seconds
                             # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                             hours = int(sectim / 3600)
@@ -319,7 +319,7 @@ class PRETSAcase:
                             timedif = log[i][j]['time:timestamp'] - starttime
                             years = int(timedif.days / 365)
                             daystime = timedif.days - years * 365
-                            month, days = PRETSAcase.month_translate(daystime)
+                            month, days = self.month_translate(daystime)
                             sectim = timedif.seconds
                             # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                             hours = int(sectim / 3600)
@@ -340,7 +340,7 @@ class PRETSAcase:
                             timedif = log[i][j]['time:timestamp'] - starttime
                             years = int(timedif.days / 365)
                             daystime = timedif.days - years * 365
-                            month, days = PRETSAcase.month_translate(daystime)
+                            month, days = self.month_translate(daystime)
                             sectim = timedif.seconds
                             # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                             hours = int(sectim / 3600)
@@ -360,7 +360,7 @@ class PRETSAcase:
                             timedif = log[i][j]['time:timestamp'] - starttime
                             years = int(timedif.days / 365)
                             daystime = timedif.days - years * 365
-                            month, days = PRETSAcase.month_translate(daystime)
+                            month, days = self.month_translate(daystime)
                             sectim = timedif.seconds
                             # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                             hours = int(sectim / 3600)
@@ -373,7 +373,7 @@ class PRETSAcase:
                     timedif = datetime.timedelta(seconds=random.randrange(0,1000))
                     years = int(timedif.days / 365)
                     daystime = timedif.days - years * 365
-                    month, days = PRETSAcase.month_translate(daystime)
+                    month, days = self.month_translate(daystime)
                     sectim = timedif.seconds
                     # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                     hours = int(sectim / 3600)
@@ -389,7 +389,7 @@ class PRETSAcase:
                     timedif = datetime.timedelta(seconds=random.randrange(0,1000))
                     years = int(timedif.days / 365)
                     daystime = timedif.days - years * 365
-                    month, days = PRETSAcase.month_translate(daystime)
+                    month, days = self.month_translate(daystime)
                     sectim = timedif.seconds
                     # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                     hours = int(sectim / 3600)
@@ -404,7 +404,7 @@ class PRETSAcase:
                     timedif = datetime.timedelta(seconds=random.randrange(0,1000))
                     years = int(timedif.days / 365)
                     daystime = timedif.days - years * 365
-                    month, days = PRETSAcase.month_translate(daystime)
+                    month, days = self.month_translate(daystime)
                     sectim = timedif.seconds
                     # 60sec -> 1 min, 60*60sec -> 60 min -> 1 hour
                     hours = int(sectim / 3600)
