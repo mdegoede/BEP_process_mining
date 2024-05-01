@@ -1,0 +1,926 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<question text="Is it allowed that the pattern starts with other activities than activity '$A'?" id="Q0">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<preconfiguration id="1">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega (k-1)*(A) Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must not start with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega k*(A)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the pattern starts with other activities than activity '$A'?" id="Q1">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" value="1"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" value="1"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<preconfiguration id="1">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" value="1"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" value="1"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega A</sampletrace>
+		</answer>
+		<answer text="No. The trace must not start with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega A</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the pattern starts with other activities than activity '$A'?" id="Q2">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A) Omega k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega (k-1)*(A)</sampletrace>
+			<sampletrace compliant="true">Omega Omega k*(A)</sampletrace>
+		</answer>
+		<answer text="No. The trace must not start with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A) Omega k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega (k-1)*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega k*(A)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the pattern ends with other activities than activity '$A'?" id="Q3">
+		<inheritedParameter name="k" constraint = "k&gt;1"/>
+		<preconfiguration id="0">
+			<group id="Comp4">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may end with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A) Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega K*(A) A</sampletrace>
+		</answer>
+		<answer text="No. The trace must not end with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+			<sampletrace compliant="false">k*(A) Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega K*(A) A</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the pattern ends with other activities than activity '$A'?" id="Q4">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp4">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" value="1"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" value="1"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may end with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega A</sampletrace>
+			<sampletrace compliant="false">Omega A A</sampletrace>
+		</answer>
+		<answer text="No. The trace must not end with other activities than activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega A</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A A</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between '$k' occurrences of activity '$A'?" id="Q5">
+		<inheritedParameter name="k" constraint = "k&gt;1"/>
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A Omega)</sampletrace>
+			<sampletrace compliant="false">Omega (K-1)*(A)</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">k*(A Omega)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between '$k' occurrences of activity '$A'?" id="Q7">
+		<inheritedParameter name="k" constraint = "k&gt;1"/>
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A) Omega k*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A Omega)</sampletrace>
+			<sampletrace compliant="false">Omega (K-1)*(A)</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A) Omega k*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">k*(A Omega)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between occurrences of activity '$A'?" id="Q8">
+		<inheritedParameter name="k" constraint = "k&gt;1"/>
+		<preconfiguration id="0">
+			<group id="Comp10">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega (K+1)*(A)</sampletrace>
+			<sampletrace compliant="true">(k-1)*(A Omega)</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+			<sampletrace compliant="false">(k+1)*(A Omega)</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">k*(A Omega)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the other activities occur between occurrences of activity '$A'?" id="Q9">
+		<inheritedParameter name="k" constraint = "k&gt;1"/>
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A) A A</sampletrace>
+			<sampletrace compliant="false">Omega (K-1)*(A)</sampletrace>
+			<sampletrace compliant="true">k*(A Omega) A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur between occurrences of activity '$A'.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A) A A</sampletrace>
+			<sampletrace compliant="false">Omega (K-1)*(A)</sampletrace>
+			<sampletrace compliant="false">k*(A Omega) A Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option is correct?" id="Q6">
+		<hasParameter name="k"/>
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="End2_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_weight" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="Arc_presence" isSet="false"/>
+			</group>
+			<group id="Comp3">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="Arc_weight" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="Arc_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="A_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Exactly '$k'.">
+			<parameter constraint= "k==1"/>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Exactly '$k'.">
+			<parameter constraint= "k&gt;1"/>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="At least '$k'.">
+			<parameter constraint= "k==1"/>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="At least '$k'.">
+			<parameter constraint= "k&gt;1"/>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Activity '$A' must not occur more than '$k' times in a trace.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Activity '$A' must not occur more than once.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Cycles of '$k' times occurrences. The number of cycles are not limited">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+	</question>
+</configurablePattern>

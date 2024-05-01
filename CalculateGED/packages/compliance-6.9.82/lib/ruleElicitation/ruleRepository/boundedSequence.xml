@@ -1,0 +1,2264 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<hasActivity name= "C"/>
+	<hasActivity name= "D"/>
+	<hasActivity name= "E"/>
+	<hasActivity name= "F"/>
+	<question text="Please specify the number of times the sequence ('$A' '$B') is allowed to occur." id="0">
+		<hasParameter name="k"/>
+		<preconfiguration id="0">
+			<group id="Comp11">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="skip"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="The sequence of activities ('$A' '$B') must occur '$k' times.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_tokens" value="k"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B)</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B)</sampletrace>
+		</answer>
+		<answer text="The sequence of activities ('$A' '$B') must occur repetitively. There is no limitation on the number of occurrences of the sequence.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B A B</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">A B A Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace starts with other activities which are not '$A' or '$B'?" id="1">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp17">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="skip"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities than activity '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B)</sampletrace>
+			<sampletrace compliant="true">Omega k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B)</sampletrace>
+		</answer>
+		<answer text="No. The trace must start with activity '$A'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B)</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B)</sampletrace>
+			<sampletrace compliant="false">Omega k*(A B)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace starts with other activities which are not '$A' or '$B'?" id="2">
+		<preconfiguration id="0">
+			<group id="Comp17">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="skip"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities than activity '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A B A B A B</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must start with activity '$A'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega </sampletrace>
+			<sampletrace compliant="false">Omega A B A B A B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between occurrences of '$A' and '$B'?" id="3">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="skip"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B)</sampletrace>
+			<sampletrace compliant="true">k*(A Omega B)</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B)</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B)</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B)</sampletrace>
+			<sampletrace compliant="false">k*(A Omega B)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between occurrences of '$A' and '$B'?" id="4">
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="skip"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega B A Omega B A B</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B A Omega B A B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between the repetitions of the sequence ('$A' '$B')?" id="5">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="skip"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the repetitions of the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B)</sampletrace>
+			<sampletrace compliant="true">k*(A B Omega)</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B)</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the repetitions of the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B)</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B)</sampletrace>
+			<sampletrace compliant="false">k*(A B Omega)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between the repetitions of the sequence ('$A' '$B')?" id="6">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="skip"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the repetitions of the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A B Omega A B Omega A B Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the repetitions of the sequence ('$A' '$B').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+			<sampletrace compliant="false">A B Omega A B Omega A B Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace starts with other activities which are not '$A' or '$B' or '$C'?" id="25">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp17">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities which are not '$A' or '$B' or '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega k*(A B C)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must not start with other activities which are not '$A' or '$B' or '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B C)</sampletrace>
+			<sampletrace compliant="false">Omega Omega k*(A B C)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$C') occurs between occurrences of '$A' and '$B' ?" id="26">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$C') may occur between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A Omega B C)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B C)</sampletrace>
+			<sampletrace compliant="false">k*(A Omega B C)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$A') occurs between occurrences of '$B' and '$C' ?" id="27">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$A') may occur between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A B Omega C)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B C)</sampletrace>
+			<sampletrace compliant="false">k*(A B Omega C)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (which are not '$A' or '$B' or '$C') occurs between repetitions of the sequence ('$A' '$B' '$C') ?" id="28">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between repetitions of the sequence ('$A' '$B' '$C').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A B C Omega)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur between repetitions of the sequence ('$A' '$B' '$C').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">(k+3)*(A B C)</sampletrace>
+			<sampletrace compliant="false">k*(A B C Omega)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace starts with other activities which are not '$A' or '$B' or '$C'?" id="7">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp17">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities which are not '$A' or '$B' or '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega A B C</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must not start with other activities which are not '$A' or '$B' or '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A B C Omega A B C</sampletrace>
+			<sampletrace compliant="false">Omega Omega A B C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$C') occurs between occurrences of '$A' and '$B' ?" id="8">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$C') may occur between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega B C</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A B C Omega A B C</sampletrace>
+			<sampletrace compliant="false">A Omega B C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$A') occurs between occurrences of '$B' and '$C' ?" id="9">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$A') may occur between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega B C</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A B C Omega A B C</sampletrace>
+			<sampletrace compliant="false">A Omega B C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace ends woth other activities (which is not '$C')?" id="10">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="skip"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may end with other activities.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A B C Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must not end with other activities.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A B C Omega A B C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace starts with other activities (which are not '$A' or '$B' or '$C' or '$D') ?" id="14">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp17">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A B C D</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must not strat with other activities.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">Omega A B C D Omega</sampletrace>
+			<sampletrace compliant="false">A B C D A B C D A B C D</sampletrace>
+			<sampletrace compliant="false">A B C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$C' and '$D') occur between occurrences of '$A' and '$B' ?" id="15">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$C' and '$D') may occur between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega B C D</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B C D</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$A' and '$D') occur between occurrences of '$B' and '$C' ?" id="16">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$A' and '$D') may occur between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A B Omega C D</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A B Omega C D</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$A' and '$B') occur between occurrences of '$C' and '$D' ?" id="17">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp3">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$A' and '$B') may occur between occurrences of activities '$C' and '$D'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A B C Omega D</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$C' and '$D'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A B C Omega D</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace ends with other activities (that are not '$A' or '$B' or '$C' or '$D') ?" id="19">
+		<inheritedParameter name="k" constraint = "k==1"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" value="1"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may end with other activities.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A B C D Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must not end with other activities.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A B C D Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace starts with other activities (that are not '$A' or '$B' or '$C' or '$D') ?" id="20">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp17">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">Omega k*(A B C D)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$C' and '$D') occur between occurrences of '$A' and '$B' ?" id="21">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$C' and '$D') may occur between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A Omega B C D)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$A' and '$B'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">k*(A Omega B C D)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$A' and '$D') occur between occurrences of '$B' and '$C' ?" id="22">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$A' and '$D') may occur between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B Omega C D)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp17">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">k*(A B Omega C D)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$A' and '$B') occur between occurrences of '$C' and '$D' ?" id="23">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp3">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$A' and '$B') may occur between occurrences of activities '$C' and '$D'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C Omega D)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activities '$B' and '$C'.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">k*(A B C Omega D)</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (which are not '$A' or '$B' or '$C' or '$D') occur between repetitions of the sequence ('$A' '$B' '$C' '$D') ?" id="24">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" value="skip"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" value="skip"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" value="allow"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between repetitions of the sequence ('$A' '$B' '$C' '$D').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D Omega)</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur between repetitions of the sequence ('$A' '$B' '$C' '$D').">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">k*(A B C D Omega)</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option is correct ?" id="18">
+		<hasParameter name="k"/>
+		<preconfiguration id="0">
+			<group id="Comp10">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="D_presence" isSet="false"/>
+			</group>
+			<group id="Comp8">
+				<property name="E_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="F_presence" isSet="false"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp14">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp15">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp16">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp4">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_presence" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp13">
+				<property name="p_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="The sequence of activities ('$A' '$B') must occur repetitively.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="C_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="D_presence" value="skip"/>
+					</group>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="Sequence of activities '$A' '$B' '$C' must occur '$k' times.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="D_presence" value="skip"/>
+					</group>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp3">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="p_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B C)</sampletrace>
+			<sampletrace compliant="true">k*(A Omega B Omega C)</sampletrace>
+			<sampletrace compliant="false">(k+2)*(A B C)</sampletrace>
+		</answer>
+			<parameter constraint= "k==1"/>
+		<answer text="Sequence of activities '$A' '$B' '$C' must occur.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="D_presence" value="skip"/>
+					</group>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp3">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_tokens" value="1"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_tokens" value="1"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_tokens" value="1"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C</sampletrace>
+			<sampletrace compliant="false">Omega A B</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega C</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

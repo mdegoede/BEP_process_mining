@@ -1,0 +1,6 @@
+,,ged_value
+Complexity,,XOR+AND+LOOP1
+Setting,Log Size,
+weak,1000,1.0
+average,1000,0.5830019493177387
+strong,1000,0.6019649122807018

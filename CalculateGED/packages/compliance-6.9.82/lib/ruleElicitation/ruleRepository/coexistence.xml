@@ -1,0 +1,35 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<question text="Is it allowed that the other activities occur between occurrences of activity '$A' and '$B'?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between occurrences of activities '$A' and '$B'.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A Omega A Omega B B A B Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A Omega B B Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur between occurrences of activities '$A' and '$B'.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A A B B A B Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A Omega B B Omega</sampletrace>
+			<sampletrace compliant="false">Omega A Omega A Omega B B A B Omega Omega</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

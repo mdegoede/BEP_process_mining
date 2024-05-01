@@ -1,0 +1,382 @@
+<questions>
+	<hasActivity name= "A"/>
+	<question text="How many times activity '$A' is allowed to occur?" id="Q0">
+		<hasParameter name="k"/>
+		<answer text="Activity '$A' must never occur.">
+			<configModel name="absence.pnml">
+			</configModel>
+			<sampletrace compliant="true"> Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega Omega A</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur once.">
+			<parameter name="k" constraint = "k==1">
+			</parameter>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A Omega</sampletrace>
+			<sampletrace compliant="false">A Omega Omega A</sampletrace>
+			<sampletrace compliant="true">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega A</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur exactly '$k' times.">
+			<parameter name="k" constraint = "k&gt;1">
+			</parameter>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega k*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A) Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega (k+3)*(A)</sampletrace>
+			<sampletrace compliant="true">Omega Omega k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega Omega (k-1)*(A)</sampletrace>
+			<sampletrace compliant="true">k*(A Omega)</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur at least once in a trace.">
+			<parameter name="k" constraint = "k==1">
+			</parameter>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega A Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur at least '$k' times.">
+			<followUpQuestion id="Q1"/>
+			<parameter name="k" constraint = "k&gt;1">
+			</parameter>
+			<sampletrace compliant="true">Omega (k+2)*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur at most once.">
+			<parameter name="k" constraint = "k==1">
+			</parameter>
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="1"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A Omega A Omega</sampletrace>
+			<sampletrace compliant="true">Omega A Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur at most '$k' times.">
+			<parameter name="k" constraint = "k&gt;1">
+			</parameter>
+			<followUpQuestion id="Q2"/>
+			<sampletrace compliant="true">Omega (k-1)*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega (k+2)*(A) Omega</sampletrace>
+			<sampletrace compliant="true">k*(A)</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur in cycles of '$k' occurrences.">
+			<followUpQuestion id="Q3"/>
+			<sampletrace compliant="true">Omega (k)*(A) Omega (k)*(A) Omega (k)*(A)</sampletrace>
+			<sampletrace compliant="false">Omega (k+2)*(A) Omega (k-1)*(A)</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option specifies the compliance rule best?" id="Q1">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<answer text="Activity '$A' must occur at least '$k' times in a trace.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega k*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega (k-1)*(A) Omega</sampletrace>
+			<sampletrace compliant="true">(k)*(Omega A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur at least '$k' times in a row. (One after the other without any other activity in between '$k' occurrences of '$A')">
+			<configModel name="boundedExistenceLowerBound.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Arc_presence" value="k-1"/>
+					</group>
+					<group id="Comp1">
+						<property name="p_tokens" value="k-1"/>
+					</group>
+					<group id="Comp2">
+						<property name="p_tokens" value="k"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega k*(A) Omega A Omega A</sampletrace>
+			<sampletrace compliant="false">A Omega (k-1)*(A) Omega A</sampletrace>
+			<sampletrace compliant="true">Omega k*(A) Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">(k)*(Omega A) Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option specifies the compliance rule best?" id="Q2">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<answer text="Activity '$A' must occur at most '$k' times in a trace.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega k*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega (k)*(A) Omega A</sampletrace>
+			<sampletrace compliant="true">(k)*(Omega A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega (k+2)*(A Omega) Omega A</sampletrace>
+			<sampletrace compliant="true">Omega (k-1)*(A) Omega A</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must occur at most '$k' times in a row. (One after the other without any other activity in between '$k' occurrences of '$A')">
+			<configModel name="boundedExistenceUpperBound.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp2">
+						<property name="Arc_weight" value="k"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega k*(A) Omega A Omega A A</sampletrace>
+			<sampletrace compliant="false">Omega (k+1)*(A) Omega</sampletrace>
+			<sampletrace compliant="true">Omega (k+2)*(Omega A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega (k)*(A) A Omega</sampletrace>
+			<sampletrace compliant="true">Omega (k+2)*(Omega A) Omega k*(A)</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option specifies the compliance rule best?" id="Q3">
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<answer text="The number of cycles are limited.">
+			<configModel name="cyclicOccurrence.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp5">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp4">
+						<property name="Arc_weight" value="k"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega k*(A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega (k)*(A) Omega A</sampletrace>
+			<sampletrace compliant="true">(k)*(Omega A) Omega</sampletrace>
+			<sampletrace compliant="false">Omega (k+2)*(A Omega) Omega A</sampletrace>
+			<sampletrace compliant="true">Omega (k-1)*(A) Omega A</sampletrace>
+		</answer>
+		<answer text="The number of cycles are not limited.">
+			<configModel name="presence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="End2_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="Arc_presence" value="allow"/>
+					</group>
+					<group id="Comp8">
+						<property name="Arc_weight" value="k"/>
+					</group>
+					<group id="Comp1">
+						<property name="Arc_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega k*(A) Omega k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega (k+1)*(A) Omega k*(A)</sampletrace>
+			<sampletrace compliant="true">Omega k*(Omega A) Omega k*(A)</sampletrace>
+			<sampletrace compliant="false">Omega (k)*(A) A Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+</questions>

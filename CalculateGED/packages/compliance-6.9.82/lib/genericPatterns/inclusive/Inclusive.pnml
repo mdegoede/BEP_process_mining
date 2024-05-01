@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pnml>
+  <net type="http://www.yasper.org/specs/epnml-1.1" id="do1">
+    <toolspecific tool="Yasper" version="1.2.4020.34351">
+      <roles xmlns="http://www.yasper.org/specs/epnml-1.1/toolspec" />
+    </toolspecific>
+    <place id="pl7">
+      <name>
+        <text>initial</text>
+      </name>
+      <graphics>
+        <position x="139" y="223" />
+        <dimension x="20" y="20" />
+      </graphics>
+      <initialMarking>
+        <text>1</text>
+      </initialMarking>
+    </place>
+    <place id="pl6">
+      <name>
+        <text>P</text>
+      </name>
+      <graphics>
+        <position x="267" y="225" />
+        <dimension x="20" y="20" />
+      </graphics>
+    </place>
+    <place id="pl8">
+      <name>
+        <text>P</text>
+      </name>
+      <graphics>
+        <position x="387" y="227" />
+        <dimension x="20" y="20" />
+      </graphics>
+    </place>
+    <place id="pl12">
+      <name>
+        <text>Final</text>
+      </name>
+      <graphics>
+        <position x="507" y="230" />
+        <dimension x="20" y="20" />
+      </graphics>
+    </place>
+    <transition id="tr6">
+      <name>
+        <text>A</text>
+      </name>
+      <graphics>
+        <position x="208" y="224" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr15">
+      <name>
+        <text>B</text>
+      </name>
+      <graphics>
+        <position x="332" y="226" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr16">
+      <name>
+        <text>A</text>
+      </name>
+      <graphics>
+        <position x="239" y="158" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr20">
+      <name>
+        <text>Omega</text>
+      </name>
+      <graphics>
+        <position x="291" y="158" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr21">
+      <name>
+        <text>Omega</text>
+      </name>
+      <graphics>
+        <position x="84" y="164" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr25">
+      <name>
+        <text>B</text>
+      </name>
+      <graphics>
+        <position x="76" y="267" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr27">
+      <name>
+        <text>A</text>
+      </name>
+      <graphics>
+        <position x="359" y="162" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr28">
+      <name>
+        <text>B</text>
+      </name>
+      <graphics>
+        <position x="425" y="286" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr29">
+      <name>
+        <text>Omega</text>
+      </name>
+      <graphics>
+        <position x="427" y="167" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr30">
+      <name>
+        <text>F</text>
+      </name>
+      <graphics>
+        <position x="451" y="227" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr1">
+      <name>
+        <text>F</text>
+      </name>
+      <graphics>
+        <position x="137" y="348" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <arc id="a2" source="pl7" target="tr6" />
+    <arc id="a3" source="pl6" target="tr15" />
+    <arc id="a4" source="tr15" target="pl8" />
+    <arc id="a16" source="tr6" target="pl6" />
+    <arc id="a17" source="pl8" target="tr30" />
+    <arc id="a18" source="tr30" target="pl12" />
+    <arc id="a19" source="pl7" target="tr21" />
+    <arc id="a20" source="tr21" target="pl7" />
+    <arc id="a21" source="pl6" target="tr16" />
+    <arc id="a22" source="tr16" target="pl6" />
+    <arc id="a23" source="pl6" target="tr20" />
+    <arc id="a24" source="tr20" target="pl6" />
+    <arc id="a33" source="pl7" target="tr25" />
+    <arc id="a34" source="tr25" target="pl7" />
+    <arc id="a35" source="pl8" target="tr27" />
+    <arc id="a36" source="tr27" target="pl8" />
+    <arc id="a37" source="pl8" target="tr28" />
+    <arc id="a38" source="tr28" target="pl8" />
+    <arc id="a39" source="pl8" target="tr29" />
+    <arc id="a40" source="tr29" target="pl8" />
+    <arc id="a41" source="pl7" target="tr1" />
+    <arc id="a42" source="tr1" target="pl12">
+      <graphics>
+        <position x="505" y="349" />
+      </graphics>
+    </arc>
+  </net>
+</pnml>

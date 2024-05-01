@@ -1,0 +1,32 @@
+print("Calculate GED...");
+
+importmodela = System.getenv("IMPORTMODELA");
+importmodelb = System.getenv("IMPORTMODELB");
+
+print("<import file=\"" + importmodela + "\">");
+
+print("    <pluginfo>");
+resa = import_petri_net_from_pnml_file(importmodela);
+print("    </pluginfo>");
+
+modela = resa[0];
+markinga = resa[1];
+
+print("<import file=\"" + importmodelb + "\">");
+
+print("    <pluginfo>");
+resb = import_petri_net_from_pnml_file(importmodelb);
+print("    </pluginfo>");
+
+modelb = resb[0];
+markingb = resb[1];
+
+print("<calculating>");
+print("    <pluginfo>");
+ged = calculate_graph_edit_distance_similarity(modela, modelb);
+print("    </pluginfo>");
+print("</calculating>");
+
+print("GED = " + ged);
+
+exit();

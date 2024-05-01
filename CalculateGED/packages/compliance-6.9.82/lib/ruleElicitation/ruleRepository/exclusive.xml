@@ -1,0 +1,220 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<question text="Is it allowed that the pattern starts with other activities than activity '$A' or '$B'?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="A_presence" value="allow"/>
+			</group>
+			<group id="Comp7">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities than activity '$A' or '$B'.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega </sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">Omega B Omega </sampletrace>
+		</answer>
+		<answer text="No. The trace must not start with other activities than activity '$A' or '$B'.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega </sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">B Omega </sampletrace>
+			<sampletrace compliant="false">Omega B Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that both activities '$A' or '$B' be absent?" id="1">
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="B_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Both activities '$A' or '$B' may be absent.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="A_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="B_presence" value="skip"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega </sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega </sampletrace>
+			<sampletrace compliant="false">Omega B Omega </sampletrace>
+		</answer>
+		<answer text="No. Both activities may not be absent. One of the activities '$A' or '$B' must occur.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="A_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega </sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">B Omega </sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' occurrs several times in a trace if activity '$B' is absent?" id="2">
+		<preconfiguration id="0">
+			<group id="Comp3">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="A_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may occur several times in a trace if activity '$B' is absent.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega A Omega A A</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">A Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' must occur once.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="false">A Omega A Omega A A</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that between occurrences of activity '$A' other activities (except '$B') occurs?" id="3">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp3">
+				<property name="A_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between occurrences of activity '$A'.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega A Omega A A</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">A A A Omega Omega</sampletrace>
+		</answer>
+		<answer text="No Other activities must not occur in between occurrences of activity '$A'.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A A A Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="false">A Omega A Omega A A</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$B' occurrs several times in a trace if activity '$A' is absent?" id="4">
+		<preconfiguration id="0">
+			<group id="Comp4">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may occur several times in a trace if activity '$A' is absent.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">B Omega B Omega B B</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must occur once.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">B Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="false">B Omega B Omega B B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that between occurrences of activity '$B' other activities (except '$A') occurs?" id="5">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp4">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between occurrences of activity '$B'.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">B Omega B Omega B B</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="true">B B B Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrences of activity '$B'.">
+			<configModel name="exclusive.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">B B B Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega </sampletrace>
+			<sampletrace compliant="false">B Omega B Omega B B</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

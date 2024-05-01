@@ -1,0 +1,1533 @@
+<configurablePattern>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') never occurs?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega Omega A_cmp A_st A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">A_st Omega Omega A_cmp A_st A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') occurs independently from activity ('$A_st' '$A_cmp') ?" id="1">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="B_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may occur independently from occurrences of activity ('$A_st' '$A_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega B_st B_cmp B_st A_st A_cmp B_cmp Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega Omega A_cmp A_st A_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$B_st' '$B_cmp') is allowed to occur only in the specified sequence with activity ('$A_st' '$A_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">A_st Omega Omega A_cmp A_st A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st B_cmp B_st A_st A_cmp B_cmp Omega B_st B_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the occurrence of the specified sequence of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') occurs multiple times?" id="2">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<preconfiguration id="1">
+			<group id="Comp9">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp8">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The specified sequence of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') may occur multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The specified sequence of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') must not occur multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that during the occurrence of the specified sequence of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') other activities occur?" id="3">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<preconfiguration id="1">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur during the specified sequence of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st Omega B_st A_cmp Omega B_cmp Omega </sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur during the specified sequence of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st Omega B_st A_cmp Omega B_cmp Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') never occurs ?" id="4">
+		<preconfiguration id="0">
+			<group id="Comp9">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st B_st A_cmp B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">B_st Omega Omega B_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$B_st' '$B_cmp') must not be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">B_st Omega Omega B_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') occurs independently from activity ('$B_st' '$B_cmp') ?" id="31">
+		<preconfiguration id="0">
+			<group id="Comp9">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp6">
+				<property name="A_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may occur independently from the activity ('$B_st' '$B_cmp') .">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st Omega Omega A_cmp A_st B_st A_cmp B_cmp Omega Omega A_st A_cmp</sampletrace>
+			<sampletrace compliant="false">B_st Omega Omega B_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">A_st B_st A_cmp B_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Yes. Activity ('$A_st' '$A_cmp') must nly occur in the specified sequence with activity ('$B_st' '$B_cmp') .">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">B_st Omega Omega B_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega Omega A_cmp A_st B_st A_cmp B_cmp Omega Omega A_st A_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') occurs independently from the specified sequences?" id="5">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega A_st A_cmp</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega A_st A_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') occurs independently from the specified sequences?" id="13">
+		<preconfiguration id="0">
+			<group id="Comp9">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">B_st B_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">B_st Omega B_cmp Omega C_st C_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$B_st' '$B_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">B_st Omega B_cmp Omega C_st C_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$C_st' '$C_cmp') occurs independently from the specified sequences?" id="14">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$C_st' '$C_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">C_st C_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$C_st' '$C_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st C_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequences of activities ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp') occur multiple times?" id="18">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The specified sequences of activities ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp') may repeat multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega A_st A_cmp B_st B_cmp C_st C_cmp</sampletrace>
+		</answer>
+		<answer text="No. The specified sequences of activities ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp') must not occur multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega A_st A_cmp B_st B_cmp C_st C_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur during the specified sequence ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp')?" id="22">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st Omega B_st Omega A_cmp B_cmp C_st C_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the sequence ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st Omega B_st Omega A_cmp B_cmp C_st C_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequences of activities ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp') never occurs?" id="26">
+		<preconfiguration id="0">
+			<group id="Comp11">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Specified sequences of activities ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp') may be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Specified sequences of activities ('$A_st' '$B_st' '$A_cmp' '$B_cmp' '$C_st' '$C_cmp') must not be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') occurs independently from the specified sequences?" id="6">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp B_st C_st B_cmp C_cmp</sampletrace>
+			<sampletrace compliant="false">Omega C_st C_cmp B_st B_cmp A_st A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp Omega A_st A_cmp B_st C_st B_cmp C_cmp A_st Omega A_cmp</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp B_st C_st B_cmp C_cmp</sampletrace>
+			<sampletrace compliant="false">Omega C_st C_cmp A_st B_st A_cmp B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp Omega A_st A_cmp B_st C_st B_cmp C_cmp A_st Omega A_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') occurs independently from the specified sequences?" id="12">
+		<preconfiguration id="0">
+			<group id="Comp9">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">B_st B_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">B_st Omega B_cmp Omega C_st C_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$B_st' '$B_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">B_st Omega B_cmp Omega C_st C_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$C_st' '$C_cmp') occurs independently from the specified sequences?" id="15">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$C_st' '$C_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">C_st C_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$C_st' '$C_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st C_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') occur multiple times?" id="21">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') may repeat multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega A_st A_cmp B_st B_cmp C_st C_cmp</sampletrace>
+		</answer>
+		<answer text="No. The specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') must not occur multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega A_st A_cmp B_st B_cmp C_st C_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur during the specified sequence ('$A_st' '$A_cmp' '$B_st' '$C_st' '$B_cmp' '$C_cmp')?" id="24">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A_st' '$A_cmp' '$B_st' '$C_st' '$B_cmp' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st Omega A_cmp B_st C_st Omega B_cmp C_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the sequence ('$A_st' '$A_cmp' '$B_st' '$C_st' '$B_cmp' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st Omega A_cmp B_st C_st Omega B_cmp C_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st '$B_cmp') ('$C_st' '$C_cmp') never occurs?" id="29">
+		<preconfiguration id="0">
+			<group id="Comp11">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st '$B_cmp') ('$C_st' '$C_cmp') may be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st '$B_cmp') ('$C_st' '$C_cmp') must not be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') occurs independently from the specified sequences?" id="7">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st Omega A_cmp A_st B_st A_cmp Omega B_cmp Omega C_st C_cmp Omega A_st A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st A_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">A_st B_st A_cmp C_st B_cmp C_cmp</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st B_st A_cmp C_st B_cmp C_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st A_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega A_cmp A_st B_st A_cmp Omega B_cmp Omega C_st C_cmp Omega A_st A_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') occurs independently from the specified sequences?" id="10">
+		<preconfiguration id="0">
+			<group id="Comp9">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">B_st B_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$B_st' '$B_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$C_st' '$C_cmp') occurs independently from the specified sequences?" id="17">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$C_st' '$C_cmp') may occur independently from occurrences of the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">C_st C_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$C_st' '$C_cmp') must must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st C_cmp Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') occur multiple times?" id="20">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') may repeat multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega A_st B_st A_cmp C_st B_cmp C_cmp </sampletrace>
+		</answer>
+		<answer text="No. The specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') must not occur multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega A_st B_st A_cmp C_st B_cmp C_cmp </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur during the specified sequence ('$A_st' '$B_st' '$A_cmp' '$C_st' '$B_cmp' '$C_cmp')?" id="23">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A_st' '$B_st' '$A_cmp' '$C_st' '$B_cmp' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st Omega B_st Omega A_cmp C_st B_cmp C_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the sequence ('$A_st' '$B_st' '$A_cmp' '$C_st' '$B_cmp' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st Omega B_st Omega A_cmp C_st B_cmp C_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st '$B_cmp') ('$C_st' '$C_cmp') never occurs?" id="27">
+		<preconfiguration id="0">
+			<group id="Comp11">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st '$B_cmp') ('$C_st' '$C_cmp') may be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp C_st B_cmp C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st '$B_cmp') ('$C_st' '$C_cmp') must not be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') occurs independently from the specified sequence?" id="8">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may occur independently from occurrences of the specified sequence.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st Omega A_cmp A_st A_cmp A_cmp Omega B_st B_cmp Omega C_st C_cmp Omega A_st A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st A_cmp C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st A_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega A_cmp A_st A_cmp A_cmp Omega B_st B_cmp Omega C_st C_cmp Omega A_st A_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') occurs independently from the specified sequence?" id="11">
+		<preconfiguration id="0">
+			<group id="Comp9">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may occur independently from occurrences of the specified sequence.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">B_st B_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$B_st' '$B_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega B_st B_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$C_st' '$C_cmp') occurs independently from the specified sequence?" id="16">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$C_st' '$C_cmp') may occur independently from occurrences of the specified sequence.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">C_st C_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$C_st' '$C_cmp') must not occur independently. It must be executed only in the specified sequences.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">C_st Omega Omega C_cmp B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">C_st C_cmp Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega C_st C_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') occur multiple times?" id="19">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') may repeat multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega A_st A_cmp B_st B_cmp C_st C_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The specified sequences of activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') and ('$C_st' '$C_cmp') must not occur multiple times.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega A_st A_cmp B_st B_cmp C_st C_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur during the specified sequence ('$A_st' '$A_cmp' '$B_st' '$B_cmp' '$C_st' '$C_cmp')?" id="25">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A_st' '$A_cmp' '$B_st' '$B_cmp' '$C_st' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega A_st Omega A_cmp B_st Omega B_cmp Omega C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between the sequence ('$A_st' '$A_cmp' '$B_st' '$B_cmp' '$C_st' '$C_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st Omega A_cmp B_st Omega B_cmp Omega C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequence of activities ('$A_st' '$A_cmp') and ('$B_st '$B_cmp') ('$C_st' '$C_cmp') never occurs?" id="28">
+		<preconfiguration id="0">
+			<group id="Comp11">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" value="block"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The specified sequence ('$A_st' '$A_cmp' '$B_st' '$B_cmp' '$C_st' '$C_cmp') may be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The specified sequence ('$A_st' '$A_cmp' '$B_st' '$B_cmp' '$C_st' '$C_cmp') must not be absent.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st A_cmp B_st B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega B_st Omega B_cmp Omega A_st Omega A_cmp</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st A_cmp B_cmp C_st C_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option is correct?" id="30">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="P7_presence" isSet="false"/>
+			</group>
+			<group id="Comp3">
+				<property name="P14_presence" isSet="false"/>
+			</group>
+			<group id="Comp4">
+				<property name="P8_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="P6_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Activity ('$A_st' '$A_cmp') must be followed by activity ('$B_st' '$B_cmp') or both activities may be executed simultaneously.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="P7_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="P14_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="P8_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Activity ('$B_st' '$B_cmp') must be preceded by activity ('$A_st' '$A_cmp') or both activities may be executed simultaneously.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="P7_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="P14_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="P8_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Activity ('$A_st' '$A_cmp') must occur before or simultaneous with activity ('$B_st' '$B_cmp') and activity ('$C_st' '$C_cmp') must occur after activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="P7_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="P14_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Activity ('$A_st' '$A_cmp') must occur before activity ('$B_st' '$B_cmp') and activity ('$C_st' '$C_cmp') must occur after or simultaneous with activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="P6_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="P8_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Activity ('$A_st' '$A_cmp') must occur before or simultaneous with activity ('$B_st' '$B_cmp') and activity ('$C_st' '$C_cmp') must occur after or simultaneous with activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="P7_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="P8_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+		<answer text="Activity ('$A_st' '$A_cmp') must occur before activity ('$B_st' '$B_cmp') and activity ('$C_st' '$C_cmp') must occur after activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="P6_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="P14_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+		</answer>
+	</question>
+</configurablePattern>

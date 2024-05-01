@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pnml>
+  <net type="http://www.yasper.org/specs/epnml-1.1" id="do1">
+    <toolspecific tool="Yasper" version="1.2.4020.34351">
+      <roles xmlns="http://www.yasper.org/specs/epnml-1.1/toolspec" />
+    </toolspecific>
+    <transition id="tr1">
+      <name>
+        <text>A</text>
+      </name>
+      <graphics>
+        <position x="266" y="233" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr9">
+      <name>
+        <text>omega</text>
+      </name>
+      <graphics>
+        <position x="191" y="166" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr6">
+      <name>
+        <text>tau</text>
+      </name>
+      <graphics>
+        <position x="403" y="231" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr2">
+      <name>
+        <text>tau</text>
+      </name>
+      <graphics>
+        <position x="524" y="231" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <place id="pl1">
+      <name>
+        <text>Initial</text>
+      </name>
+      <graphics>
+        <position x="190" y="234" />
+        <dimension x="20" y="20" />
+      </graphics>
+      <initialMarking>
+        <text>1</text>
+      </initialMarking>
+    </place>
+    <place id="pl2">
+      <name>
+        <text>Count</text>
+      </name>
+      <graphics>
+        <position x="331" y="233" />
+        <dimension x="20" y="20" />
+      </graphics>
+    </place>
+    <place id="pl3">
+      <name>
+        <text>K=2</text>
+      </name>
+      <graphics>
+        <position x="265" y="294" />
+        <dimension x="20" y="20" />
+      </graphics>
+      <initialMarking>
+        <text>2</text>
+      </initialMarking>
+    </place>
+    <place id="pl8">
+      <name>
+        <text>Final</text>
+      </name>
+      <graphics>
+        <position x="522" y="294" />
+        <dimension x="20" y="20" />
+      </graphics>
+    </place>
+    <place id="pl4">
+      <name>
+        <text>P</text>
+      </name>
+      <graphics>
+        <position x="459" y="233" />
+        <dimension x="20" y="20" />
+      </graphics>
+    </place>
+    <arc id="a1" source="tr1" target="pl2" />
+    <arc id="a2" source="pl3" target="tr1" />
+    <arc id="a4" source="pl1" target="tr1" />
+    <arc id="a5" source="tr1" target="pl1" />
+    <arc id="a6" source="pl1" target="tr9" />
+    <arc id="a7" source="tr9" target="pl1" />
+    <arc id="a8" source="pl2" target="tr6" />
+    <arc id="a9" source="tr6" target="pl3">
+      <type>
+        <text>reset</text>
+      </type>
+      <graphics>
+        <position x="361" y="293" />
+      </graphics>
+    </arc>
+    <arc id="a10" source="tr6" target="pl4" />
+    <arc id="a11" source="pl4" target="tr2" />
+    <arc id="a12" source="tr2" target="pl8" />
+    <arc id="a13" source="tr2" target="pl1">
+      <type>
+        <text>reset</text>
+      </type>
+      <graphics>
+        <position x="462" y="342" />
+        <position x="190" y="343" />
+      </graphics>
+    </arc>
+  </net>
+</pnml>

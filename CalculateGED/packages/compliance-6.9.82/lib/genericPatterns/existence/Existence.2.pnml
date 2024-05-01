@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pnml>
+  <net type="http://www.yasper.org/specs/epnml-1.1" id="do1">
+    <toolspecific tool="Yasper" version="1.2.4020.34351">
+      <roles xmlns="http://www.yasper.org/specs/epnml-1.1/toolspec" />
+    </toolspecific>
+    <place id="pl1">
+      <name>
+        <text>Initial</text>
+      </name>
+      <graphics>
+        <position x="260" y="168" />
+        <dimension x="20" y="20" />
+      </graphics>
+      <initialMarking>
+        <text>1</text>
+      </initialMarking>
+    </place>
+    <place id="pl3">
+      <name>
+        <text>Final</text>
+      </name>
+      <graphics>
+        <position x="366" y="164" />
+        <dimension x="20" y="20" />
+      </graphics>
+    </place>
+    <transition id="tr2">
+      <name>
+        <text>Omega</text>
+      </name>
+      <graphics>
+        <position x="262" y="107" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <transition id="tr5">
+      <name>
+        <text>F</text>
+      </name>
+      <graphics>
+        <position x="311" y="166" />
+        <dimension x="32" y="32" />
+      </graphics>
+    </transition>
+    <arc id="a5" source="tr5" target="pl3" />
+    <arc id="a6" source="pl1" target="tr5" />
+    <arc id="a7" source="pl1" target="tr2" />
+    <arc id="a8" source="tr2" target="pl1" />
+  </net>
+</pnml>

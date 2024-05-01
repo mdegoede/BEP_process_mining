@@ -1,0 +1,394 @@
+<configurablePattern>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') occurs independently from activity ('$B_st' '$B_cmp')?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may occur independently from activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp A_st Omega A_cmp A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not occur independently from activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp A_st Omega A_cmp A_st B_st B_cmp A_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') occurs multiple times during activity ('$A_st' '$A_cmp') ?" id="1">
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may occur multiple times during activity ('$A_st' '$A_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st Omega B_st B_cmp B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Several occurrences of activity ('$B_st' '$B_cmp') during one activity ('$A_st' '$A_cmp') is not allowed.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega B_st B_cmp B_st B_cmp A_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$B_st' '$B_cmp') never occurs?" id="2">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$B_st' '$B_cmp') may be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp A_st Omega A_cmp A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$B_st' '$B_cmp') must not be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp A_st Omega A_cmp A_st A_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur in between occurrences of activity ('$A_st' '$A_cmp') and activity ('$B_st' '$B_cmp')?" id="3">
+		<preconfiguration id="0">
+			<group id="Comp4">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur between occurrences of activity ('$A_st' '$A_cmp') and activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st Omega B_st Omega B_cmp Omega A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities may not occur between occurrences of activity ('$A_st' '$A_cmp') and activity ('$B_st' '$B_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega B_st Omega B_cmp Omega A_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that none of the activities ('$A_st' '$A_cmp') or ('$B_st' '$B_cmp') occur?" id="4">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Both activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') may be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Both activities ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') must not be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that occurrence of the specified sequence of ('($B_st' '$B_cmp') during ('$A_st' '$A_cmp')) repeats several times?" id="5">
+		<preconfiguration id="0">
+			<group id="Comp3">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp6">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Occurrence of activity ('$B_st' '$B_cmp') during activity ('$A_st' '$A_cmp') may repeat multiple times.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega A_st B_st B_cmp A_cmp Omega </sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Occurrence of activity ('$B_st' '$B_cmp') during activity ('$A_st' '$A_cmp') must not repeat multiple times.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega A_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega A_st B_st B_cmp A_cmp Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$B_st' '$B_cmp') occur during occurrence of activity ('$A_st' '$A_cmp')?" id="6">
+		<preconfiguration id="0">
+			<group id="Comp4">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Apart from activity ('$B_st' '$B_cmp') other activities may occur during occurrences of activity ('$A_st' '$A_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp Omega Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="true">A_st Omega Omega A_cmp Omega Omega B_st B_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. No activity must occur during occurrences of activity ('$A_st' '$A_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp Omega Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega Omega A_cmp Omega B_st B_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') never occurs?" id="7">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp Omega Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp Omega Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity ('$A_st' '$A_cmp') occurs multiple times?" id="8">
+		<preconfiguration id="0">
+			<group id="Comp3">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp7">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity ('$A_st' '$A_cmp') may occur multiple times.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp Omega A_st A_cmp Omega B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega B_st B_cmp Omega A_st A_cmp Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity ('$A_st' '$A_cmp') must not occur several times.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega B_st B_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp Omega A_st A_cmp Omega B_st B_cmp Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option is correct?" id="9">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp1">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp7">
+				<property name="A_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Activity ('$B_st' '$B_cmp') must occur during activity ('$A_st' '$A_cmp') .">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp1">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A_st B_st B_cmp A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st A_cmp Omega B_st B_cmp </sampletrace>
+		</answer>
+		<answer text="Activity ('$B_st' '$B_cmp') must not occur during activity ('$A_st' '$A_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega Omega B_st B_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">Omega A_st B_st B_cmp A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp Omega A_st Omega B_st B_cmp Omega A_cmp</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

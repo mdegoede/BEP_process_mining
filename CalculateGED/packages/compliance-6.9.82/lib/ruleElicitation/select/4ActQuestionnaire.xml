@@ -1,0 +1,1195 @@
+<questions>
+	<question text="Define the limitation you would like to exert." id="Q0">
+		<hasActivity name="A"/>
+		<hasActivity name="B"/>
+		<hasActivity name="C"/>
+		<hasActivity name="D"/>
+		<answer text="Repetitive occurrence of a sequence.">
+			<followUpQuestion id="Q2"/>
+			<sampletrace compliant="true">A B C D A B C D</sampletrace>
+			<sampletrace compliant="true">A A B C D</sampletrace>
+			<sampletrace compliant="true">D D C B A</sampletrace>
+			<sampletrace compliant="true">A B C D B C D</sampletrace>
+			<sampletrace compliant="true">D C B D C B D C B A</sampletrace>
+			<sampletrace compliant="true">A B C D C D</sampletrace>
+			<sampletrace compliant="true">D C D C B A</sampletrace>
+			<sampletrace compliant="true">A B C D D D</sampletrace>
+		</answer>
+		<answer text="Sequence of Occurrence.">
+			<followUpQuestion id="Q1"/>
+			<sampletrace compliant="true">A B C D</sampletrace>
+		</answer>
+	</question>
+	<question text="Define the sequence of occurrence." id="Q1">
+		<hasActivity name="A"/>
+		<hasActivity name="B"/>
+		<hasActivity name="C"/>
+		<hasActivity name="D"/>
+		<answer text="Sequence of activities ('$A' '$B' '$C' '$D') must occur.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_tokens" value="1"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_tokens" value="1"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_tokens" value="1"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_tokens" value="1"/>
+					</group>
+					<group id="Comp15">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D </sampletrace>
+			<sampletrace compliant="false">Omega A B</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega C Omega D </sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be followed by the sequence of activities ('$B' '$C' '$D').">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp18">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp19">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp5">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D </sampletrace>
+			<sampletrace compliant="false">Omega A </sampletrace>
+			<sampletrace compliant="true">A Omega B Omega C Omega D </sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$A' '$B') must be followed by the sequence of activities ('$C' '$D').">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp18">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp19">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp26">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp5">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D </sampletrace>
+			<sampletrace compliant="false">Omega A B</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega C Omega D </sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$A' '$B' '$C') must be followed by activity '$D'.">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp18">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp19">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp21">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp12">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp26">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp5">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D</sampletrace>
+			<sampletrace compliant="false">Omega A B C</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega C Omega D </sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be preceded by the sequence of activities ('$D' '$C' '$B').">
+			<configModel name="chainPrecedence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp5">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp8">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp28">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp33">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp27">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">D C B A</sampletrace>
+			<sampletrace compliant="false">Omega A</sampletrace>
+			<sampletrace compliant="true">D Omega C Omega B Omega A </sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$B' '$A') must be preceded by the sequence of activities ('$D' '$C').">
+			<configModel name="chainPrecedence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp5">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp8">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp28">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp33">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp21">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp22">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp27">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">D C B A</sampletrace>
+			<sampletrace compliant="false">Omega B A</sampletrace>
+			<sampletrace compliant="true">D Omega C Omega B Omega A </sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$C' '$B' '$A') must be preceded by the activity '$D'.">
+			<configModel name="chainPrecedence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp5">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp8">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp28">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp33">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp21">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp22">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp27">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">D C B A</sampletrace>
+			<sampletrace compliant="false">Omega C B A</sampletrace>
+			<sampletrace compliant="true">D Omega C Omega B Omega A </sampletrace>
+		</answer>
+	</question>
+	<question text="Define the sequence of occurrence." id="Q2">
+		<answer text="Sequence of activities ('$A' '$B' '$C' '$D') must occur repetitively.">
+			<followUpQuestion id="Q3"/>
+			<sampletrace compliant="true">A B C D A B C D</sampletrace>
+			<sampletrace compliant="false">B C D A</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega C Omega D A B C D</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be followed by sequence of activities ('$B' '$C' '$D') repetitively.">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp18">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp5">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp19">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D B C D</sampletrace>
+			<sampletrace compliant="false">B C D A</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega C Omega D B C D</sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$A' '$B') must be followed by sequence of activities ('$C' '$D') repetitively.">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp18">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp5">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp19">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp26">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D C D</sampletrace>
+			<sampletrace compliant="false">B C A B</sampletrace>
+			<sampletrace compliant="true">A B Omega C Omega D C D</sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$A' '$B' '$C') must be followed by activity '$D' repetitively.">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp16">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp5">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp19">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp26">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp21">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp12">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D D</sampletrace>
+			<sampletrace compliant="false">B C A B C</sampletrace>
+			<sampletrace compliant="true">A B Omega C Omega D D</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be preceded by the sequence of activities ('$D' '$C' '$B') repetitively.">
+			<configModel name="chainPrecedence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp5">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp11">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp28">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp33">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp27">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">D C B D C B D C B A</sampletrace>
+			<sampletrace compliant="false">Omega A</sampletrace>
+			<sampletrace compliant="true">D C Omega B D C Omega B Omega A </sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$B' '$A') must be preceded by the sequence of activities ('$D' '$C') repetitively.">
+			<configModel name="chainPrecedence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp5">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp11">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp28">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp33">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp27">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp14">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp22">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp21">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">D C D C D C B A</sampletrace>
+			<sampletrace compliant="false">Omega B A</sampletrace>
+			<sampletrace compliant="true">D Omega C D C Omega B A</sampletrace>
+		</answer>
+		<answer text="Sequence of activities ('$C' '$B' '$A') must be preceded by activity '$D' repetitively.">
+			<configModel name="chainPrecedence.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp5">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp28">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp33">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp27">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp14">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp22">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp21">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">D D D C B A</sampletrace>
+			<sampletrace compliant="false">Omega C B A</sampletrace>
+			<sampletrace compliant="true">D Omega D C Omega B A</sampletrace>
+		</answer>
+	</question>
+	<question text="Please specify the number of times the sequence '$A' '$B' '$C' '$D' must occur." id="Q3">
+		<hasParameter name="k"/>
+		<answer text="Sequence of activities '$A' '$B' '$C' '$D' must occur '$k' times.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp11">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp12">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_presence" value="allow"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_tokens" value="k"/>
+					</group>
+					<group id="Comp15">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="D_presence" value="allow"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">k*(A B C D)</sampletrace>
+			<sampletrace compliant="false">(k-1)*(A B C D)</sampletrace>
+			<sampletrace compliant="true">k*(A Omega B Omega C Omega D) </sampletrace>
+		</answer>
+		<answer text="Sequence of activities '$A' '$B' '$C' '$D' may repeat any number of times.">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp18">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp5">
+						<property name="C_presence" value="allow"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B C D A B C D A B C D</sampletrace>
+			<sampletrace compliant="false">A B A B</sampletrace>
+			<sampletrace compliant="true">A B C D Omega A Omega B C D</sampletrace>
+		</answer>
+	</question>
+</questions>

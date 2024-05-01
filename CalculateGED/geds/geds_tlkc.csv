@@ -1,0 +1,15 @@
+,,,ged_value
+Complexity,,,XOR+AND+LOOP1
+Background Type,Setting,Log Size,
+multiset,weak,1000,1.0
+multiset,average,1000,1.0
+multiset,strong,1000,0.9019457863660764
+relative,weak,1000,1.0
+relative,average,1000,0.9036796536796536
+relative,strong,1000,0.904280303030303
+sequence,weak,1000,1.0
+sequence,average,1000,0.9349005604324754
+sequence,strong,1000,0.9379308634627784
+set,weak,1000,1.0
+set,average,1000,1.0
+set,strong,1000,1.0

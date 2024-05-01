@@ -1,0 +1,110 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<question text="Is it allowed that the activities '$A' and '$B' be absent?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp4">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activities '$A' and '$B' may be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A B B A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A A Omega B B Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Activities '$A' and '$B' must not be absent.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">Omega A B B A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A A Omega B B Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the trace starts with other activities than activity '$A' or '$B'?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp4">
+				<property name="End1_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. The trace may start with other activities than activity '$A' or '$B'.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B B A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A A Omega B B Omega</sampletrace>
+			<sampletrace compliant="true">Omega A B A B Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The trace must not start with other activities than activity '$A' or '$B'.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B B A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A A Omega B B Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B A B Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that in between an occurrence of a pair of ('$A' '$B') or ('$B' '$A') other activities occur?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp3">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. In between occurrence of a pair of ('$A' '$B') or ('$B' '$A') other activities may occur.">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+					<group id="Comp3">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A Omega B Omega B A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A A Omega B B Omega</sampletrace>
+			<sampletrace compliant="true">Omega A B A B Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur in between occurrence of a pair of ('$A' '$B') or ('$B' '$A').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B B A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A A Omega B B Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega B A Omega Omega</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

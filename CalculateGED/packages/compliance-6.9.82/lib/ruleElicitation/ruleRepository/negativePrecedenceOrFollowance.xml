@@ -1,0 +1,145 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<question text="Is it allowed that activity '$A' occurs indirectly before activity '$B'?">
+		<preconfiguration id="0">
+				<group id="Comp1">
+					<property name="Omega_presence" isSet="false"/>
+				</group>
+		</preconfiguration>
+		<answer text="Yes. The activity '$A' may occur indirectly before activity '$B'.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp1">
+    					<property name="Omega_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">A Omega B Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega A Omega</sampletrace>			
+			<sampletrace compliant="true">Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="true">Omega B Omega A</sampletrace>
+		</answer>
+		<answer text="No. The activity '$B' must never occur after activity '$A' (neither directly nor indirectly).">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp1">
+    					<property name="Omega_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega A Omega</sampletrace>			
+			<sampletrace compliant="true">Omega B Omega A</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' occurs multiple times?">
+		<preconfiguration id="0">
+				<group id="Comp3">
+					<property name="A_presence" isSet="false"/>
+				</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may occur multiple times.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp3">
+    					<property name="A_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">Omega Omega A Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega B Omega A</sampletrace>
+			<sampletrace compliant="true">Omega Omega A A A</sampletrace>
+		</answer>
+		<answer text="No. The activity '$A' must occur at most once.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp3">
+    					<property name="A_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>     
+			<sampletrace compliant="true">Omega Omega A Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega A A A</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' never occurs?">
+		<preconfiguration id="0">
+				<group id="Comp2">
+					<property name="I_cmp_presence" isSet="false"/>
+				</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may be absent.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp2">
+    					<property name="I_cmp_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">Omega Omega A Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega B B Omega A</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. The activity '$A' must not be absent.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp2">
+    					<property name="I_cmp_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>        
+			<sampletrace compliant="true">Omega Omega A Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega B B Omega A</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that after occurrence of activity '$A' any other activity occur?">
+		<preconfiguration id="0">
+				<group id="Comp1">
+					<property name="Omega_presence" isSet="false"/>
+				</group>
+				<group id="Comp4">
+					<property name="Omega_presence" isSet="false"/>
+				</group>
+		</preconfiguration>
+		<answer text="Yes. After occurrence of activity '$A' other activities except activity '$B' may occur.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp1">
+    					<property name="Omega_presence" value="allow"/>
+    				</group>
+    				<group id="Comp4">
+    					<property name="Omega_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>      
+			<sampletrace compliant="true">Omega Omega A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega B B Omega A</sampletrace>
+		</answer>
+		<answer text="No. After occurrence of activity '$A' no other activities must occur.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+    			<configuration>
+    				<group id="Comp1">
+    					<property name="Omega_presence" value="block"/>
+    				</group>
+    				<group id="Comp4">
+    					<property name="Omega_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>     
+			<sampletrace compliant="true">Omega Omega A</sampletrace>
+			<sampletrace compliant="false">Omega A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega B B Omega A</sampletrace>
+			<sampletrace compliant="false">Omega Omega A Omega Omega</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

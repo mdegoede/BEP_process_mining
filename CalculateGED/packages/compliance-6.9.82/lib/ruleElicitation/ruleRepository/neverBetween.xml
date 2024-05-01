@@ -1,0 +1,191 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<hasActivity name= "C"/>
+	<question text="Is it allowed that activity '$B' occurs before occurrence of activity '$A' or '$C'?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp2">
+				<property name="B_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may occur before occurrence of activity '$A' or '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="true">B B B A C</sampletrace>
+		</answer>
+		<answer text="No.  Activity '$B' must not occur before occurrence of activity '$A' or '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="false">B B B A C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (which are not '$A' or '$B' or '$C') occur before occurrence of activity '$A' or '$C'?" id="1">
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur before occurrence of activity '$A' or '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega A C</sampletrace>
+		</answer>
+		<answer text="No.  Other activities must not occur before occurrence of activity '$A' or '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega A C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that none of the activities '$A' or '$C' occurs?" id="2">
+		<preconfiguration id="0">
+			<group id="Comp3">
+				<property name="I_cmp_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Both activities '$A' and '$C' may be absent.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="I_cmp_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No.  Both activities '$A' and '$C' must not be absent.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="I_cmp_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (except '$B') occurs in between occurrences of  '$A' and '$C'?" id="3">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities (except '$B') may occur in between occurrences of activity '$A' and '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega C</sampletrace>
+		</answer>
+		<answer text="No.  Other activities (except '$B') must not occur in between occurrences of activity '$A' and '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="false">A Omega Omega C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that '$B' occurs after occurrence of activities '$A' and '$C'?" id="4">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="B_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may occur after occurrence of activities '$A' and '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="true">A C B B B </sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must not occur after occurrence of activities '$A' and '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="false">A C B B B </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities (which are not '$B') occur after occurrence of activities '$A' and '$C'?" id="5">
+		<preconfiguration id="0">
+			<group id="Comp4">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes.  Other activities may occur after occurrence of activities '$A' and '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="true">A C Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. Other activities must not occur after occurrence of activities '$A' and '$C'.">
+			<configModel name="neverBetween.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B C Omega</sampletrace>
+			<sampletrace compliant="false">A C Omega Omega</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

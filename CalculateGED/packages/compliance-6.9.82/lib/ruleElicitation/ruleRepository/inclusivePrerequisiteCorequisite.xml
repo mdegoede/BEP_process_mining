@@ -1,0 +1,146 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<question text="Which option is correct?">
+		<preconfiguration id="0">
+				<group id="Comp3">
+					<property name="A_presence" isSet="false"/>
+				</group>
+		</preconfiguration>
+		<answer text="If activity '$A' is executed then; activity '$B' must be executed.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp3">
+    					<property name="A_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+		</answer>
+		<answer text="If activity '$A' is executed then; activity '$B' may be executed.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp3">
+    					<property name="A_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>     
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false"></sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega A Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Which option is correct?">
+		<preconfiguration>
+				<group id="Comp4">
+					<property name="B_presence" isSet="false"/>
+				</group>
+		</preconfiguration>
+		<answer text="If activity '$B' is executed then; activity '$A' must be executed.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp4">
+    					<property name="B_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+		</answer>
+		<answer text="If activity '$B' is executed then; activity '$A' may be executed.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp4">
+    					<property name="B_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>     
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false"></sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega B Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' occurs several times?">
+		<preconfiguration>
+				<group id="Comp1">
+					<property name="A_presence" isSet="false"/>
+				</group>
+				<group id="Comp3">
+					<property name="A_presence" value="block"/>
+				</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may occur several times.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp1">
+    					<property name="A_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega A Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' may occur at most once.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp1">
+    					<property name="A_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>     
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">A Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega A Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$B' occurs several times?">
+		<preconfiguration>
+				<group id="Comp2">
+					<property name="B_presence" isSet="false"/>
+				</group>
+				<group id="Comp4">
+					<property name="B_presence" value="block"/>
+				</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may occur several times.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp2">
+    					<property name="B_presence" value="allow"/>
+    				</group>
+    			</configuration>
+			</configModel>      
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega B Omega</sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' may occur at most once.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+    			<configuration>
+    				<group id="Comp2">
+    					<property name="B_presence" value="block"/>
+    				</group>
+    			</configuration>
+			</configModel>    
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">B Omega Omega Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B Omega</sampletrace>
+			<sampletrace compliant="false">B Omega A Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

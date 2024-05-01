@@ -1,0 +1,1141 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<hasActivity name= "B"/>
+	<hasActivity name= "C"/>
+	<question text="Is it allowed that several occurrences of activity '$A' be followed by activity '$B' or '$C'?" id="0">
+		<preconfiguration id="0">
+			<group id="Comp13">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Several occurrences of activity '$A' may be followed by an occurrence of activity '$B' or '$C'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp13">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="true">A A A B </sampletrace>
+		</answer>
+		<answer text="No. Every occurrence of activity '$A' must be followed by an occurrence of activity '$C' or '$B'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp13">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A A A C </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that several occurrences of activity '$B' be preceded by activity '$A' or '$C'?" id="11">
+		<preconfiguration id="0">
+			<group id="Comp5">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Several occurrences of activity '$B' may be preceded by an occurrence of activity '$A' or '$C'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+		</answer>
+		<answer text="No. Every occurrence of activity '$B' must be preceded by an occurrence of activity '$C' or '$B'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="false">C B B B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$B' occurs independently from the specified sequence?" id="1">
+		<preconfiguration id="0">
+			<group id="Comp12">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may occur independently from the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp12">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="true">B B B A C </sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must not occur independently. Occurrence of activity '$B' is only allowed in the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp12">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">B B B A C </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$B' occurs independently from the specified sequence?" id="19">
+		<preconfiguration id="0">
+			<group id="Comp12">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may occur independently from the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp12">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A A A B</sampletrace>
+			<sampletrace compliant="false">Omega A A A</sampletrace>
+			<sampletrace compliant="true">B B B A A A B</sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must not occur independently. Occurrence of activity '$B' is only allowed in the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp12">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A A A B</sampletrace>
+			<sampletrace compliant="false">Omega A A A</sampletrace>
+			<sampletrace compliant="false">B B B A A A B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' occurs independently from the specified sequence?" id="13">
+		<preconfiguration id="0">
+			<group id="Comp11">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may occur independently from the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">B B B </sampletrace>
+			<sampletrace compliant="true">A A B B B</sampletrace>
+			<sampletrace compliant="true">A A B A B B A A</sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' must not occur independently. Occurrence of activity '$A' is only allowed in the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">B B B </sampletrace>
+			<sampletrace compliant="false">A A B B B</sampletrace>
+			<sampletrace compliant="false">A A B A B B A A</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' occurs independently from the specified sequence?" id="10">
+		<preconfiguration id="0">
+			<group id="Comp11">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="allow"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may occur independently from the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="A_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="true">A A A B A </sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' must not occur independently. Occurrence of activity '$A' is only allowed in the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="false">A C B A A</sampletrace>
+			<sampletrace compliant="false">A A A B A </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$C' occurs independently from the specified sequence?" id="2">
+		<preconfiguration id="0">
+			<group id="Comp10">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$C' may occur independently from the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="true">C C C A B </sampletrace>
+		</answer>
+		<answer text="No. Activity '$C' must not occur independently. Occurrence of activity '$C' is only allowed in the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">C C C A C </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$C' occurs independently from the specified sequence?" id="9">
+		<preconfiguration id="0">
+			<group id="Comp10">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$C' may occur independently from the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B C C C</sampletrace>
+			<sampletrace compliant="true">C C C A B </sampletrace>
+		</answer>
+		<answer text="No. Activity '$C' must not occur independently. Occurrence of activity '$C' is only allowed in the specified sequence.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="false">C B C C C</sampletrace>
+			<sampletrace compliant="false">C C C A B </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occurs between the sequence ('$A' '$C') or the sequence ('$A' '$B')?" id="3">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A' '$B') or ('$A' '$C')">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B </sampletrace>
+			<sampletrace compliant="true">A Omega Omega C</sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' must be followed directly by activity '$B' or '$C'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A Omega Omega C</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occur between the sequence ('$A' '$B') or two subsequent '$B'?" id="14">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A' '$B') or two subsequent '$B'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">B B B Omega</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega B</sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must be preceded directly by itself or activity '$A.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">B B B Omega</sampletrace>
+			<sampletrace compliant="false">A Omega B Omega B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occurs between the sequence ('$A' '$B') or the sequence ('$C' '$B')?" id="8">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A' '$B') or ('$C' '$B')">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B C</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B </sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must be preceded directly by activity '$A' or '$C'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">B C</sampletrace>
+			<sampletrace compliant="false">C Omega Omega B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that other activities occurs between the sequence ('$A' '$B') or two subsequent '$A'?" id="18">
+		<preconfiguration id="0">
+			<group id="Comp8">
+				<property name="Omega_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Other activities may occur in between the sequence ('$A' '$B').">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">Omega A A A Omega</sampletrace>
+			<sampletrace compliant="true">A Omega Omega B </sampletrace>
+			<sampletrace compliant="true">A Omega A B</sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' must be followed directly by activity '$B' or itself.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp8">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A A A B</sampletrace>
+			<sampletrace compliant="false">Omega A A A Omega</sampletrace>
+			<sampletrace compliant="false">A Omega Omega B </sampletrace>
+			<sampletrace compliant="false">A Omega A B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequence of ('$A' '$C') or ('$A' '$B') occurs multiple times?" id="4">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Sequence of ('$A' '$B') or ('$A' '$C') may occur several times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="true">A B Omega A C A B</sampletrace>
+		</answer>
+		<answer text="No. Specified sequence of ('$A' '$B') or ('$A' '$C') must not occur multiple times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">A B Omega A C A B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequence of ('$A' '$B') occurs multiple times?" id="15">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Sequence of ('$A' '$B') may occur several times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B </sampletrace>
+			<sampletrace compliant="false">B B B B Omega</sampletrace>
+			<sampletrace compliant="true">A B Omega A B B</sampletrace>
+		</answer>
+		<answer text="No. Specified sequence of ('$A' '$B') must not occur multiple times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B </sampletrace>
+			<sampletrace compliant="false">B B B B Omega</sampletrace>
+			<sampletrace compliant="false">A B Omega A B B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequence of ('$A' '$B') occurs multiple times?" id="17">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Sequence of ('$A' '$B') may occur several times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A A A B </sampletrace>
+			<sampletrace compliant="false">A A A Omega</sampletrace>
+			<sampletrace compliant="true">A B Omega A A B</sampletrace>
+		</answer>
+		<answer text="No. Specified sequence of ('$A' '$B') must not occur multiple times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A B B B </sampletrace>
+			<sampletrace compliant="false">A A A Omega</sampletrace>
+			<sampletrace compliant="false">A B Omega A A B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that the specified sequence of ('$A' '$B') or ('$C' '$B') occurs multiple times?" id="7">
+		<preconfiguration id="0">
+			<group id="Comp6">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Sequence of ('$A' '$B') or ('$C' '$B') may occur several times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="true">A B Omega C B A B</sampletrace>
+		</answer>
+		<answer text="No. Specified sequence of ('$A' '$B') or ('$C' '$B') must not occur multiple times.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="Tau_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="false">A B Omega C B A B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' never occurs?" id="5">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega </sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' must not be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$A' never occurs?" id="16">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp5">
+				<property name="B_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$A' may be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A A A B</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega </sampletrace>
+		</answer>
+		<answer text="No. Activity '$A' must not be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A A A B</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$B' never occurs?" id="6">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="allow"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega </sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must not be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that activity '$B' never occurs?" id="12">
+		<preconfiguration id="0">
+			<group id="Comp7">
+				<property name="End1_presence" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" value="block"/>
+			</group>
+			<group id="Comp10">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" value="block"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" value="allow"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" value="block"/>
+			</group>
+		</preconfiguration>
+		<answer text="Yes. Activity '$B' may be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">B B B Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega </sampletrace>
+		</answer>
+		<answer text="No. Activity '$B' must not be absent.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp7">
+						<property name="End1_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">B B B Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega </sampletrace>
+		</answer>
+	</question>
+	<question text="Which option is correct?" id="20">
+		<preconfiguration id="0">
+			<group id="Comp10">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp2">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp12">
+				<property name="B_presence" isSet="false"/>
+			</group>
+			<group id="Comp4">
+				<property name="C_presence" isSet="false"/>
+			</group>
+			<group id="Comp9">
+				<property name="Tau_presence" isSet="false"/>
+			</group>
+			<group id="Comp11">
+				<property name="A_presence" isSet="false"/>
+			</group>
+			<group id="Comp13">
+				<property name="A_presence" isSet="false"/>
+			</group>
+		</preconfiguration>
+		<answer text="Activity '$A' must be followed by itself or by activity '$B'">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A A A A B</sampletrace>
+			<sampletrace compliant="false">A A A Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$B' must be preceded by itself or activity '$A'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp12">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="false">B B B Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be followed either by activity '$B' or activity '$C'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp11">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega A Omega</sampletrace>
+			<sampletrace compliant="true">A C</sampletrace>
+		</answer>
+		<answer text="Activity '$B' must be preceded either by activity '$A' or activity '$C'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp12">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">Omega B Omega</sampletrace>
+			<sampletrace compliant="true">C B</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>

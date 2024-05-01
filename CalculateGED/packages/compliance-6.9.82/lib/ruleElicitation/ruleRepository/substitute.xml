@@ -1,0 +1,112 @@
+<configurablePattern>
+  <hasActivity name="A" />
+  <hasActivity name="B" />
+  <question text="Is it allowed that activity '$A' occurs several times?">
+    <preconfiguration id="0">
+      <group id="Comp3">
+        <property name="A_presence" isSet="false" />
+      </group>
+    </preconfiguration>
+    <answer text="Yes. Activity '$A' may occur several times.">
+			<configModel name="substitute.pnml">  
+              <configuration>
+                <group id="Comp3">
+                  <property name="A_presence" value="allow" />
+                </group>
+              </configuration>
+			</configModel>              
+      <sampletrace compliant="true">A Omega Omega Omega</sampletrace>
+      <sampletrace compliant="false">Omega Omega Omega</sampletrace>
+      <sampletrace compliant="true">Omega Omega Omega B Omega</sampletrace>
+      <sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+      <sampletrace compliant="true">A Omega A Omega Omega</sampletrace>
+      <sampletrace compliant="true">B Omega A Omega A</sampletrace>
+    </answer>
+    <answer text="No. Activity '$A' must occur at most once.">
+			<configModel name="substitute.pnml">      
+              <configuration>
+                <group id="Comp3">
+                  <property name="A_presence" value="block" />
+                </group>
+              </configuration>
+			</configModel>            
+      <sampletrace compliant="true">A Omega Omega Omega</sampletrace>
+      <sampletrace compliant="false">Omega Omega Omega</sampletrace>
+      <sampletrace compliant="true">Omega Omega B Omega</sampletrace>
+      <sampletrace compliant="false">B Omega A Omega A</sampletrace>
+      <sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+    </answer>
+  </question>
+  <question text="Is it allowed that activity '$B' occurs several times?">
+    <preconfiguration id="0">
+      <group id="Comp2">
+        <property name="B_presence" isSet="false" />
+      </group>
+    </preconfiguration>
+    <answer text="Yes. Activity '$B' may occur several times.">
+			<configModel name="substitute.pnml">          
+              <configuration>
+                <group id="Comp2">
+                  <property name="B_presence" value="allow" />
+                </group>
+              </configuration>
+			</configModel>               
+      <sampletrace compliant="true">B Omega Omega Omega</sampletrace>
+      <sampletrace compliant="false">Omega Omega Omega</sampletrace>
+      <sampletrace compliant="true">Omega Omega Omega A Omega</sampletrace>
+      <sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+      <sampletrace compliant="true">B Omega B Omega Omega</sampletrace>
+      <sampletrace compliant="true">A Omega B Omega B</sampletrace>
+    </answer>
+    <answer text="No. Activity '$B' must occur at most once.">
+			<configModel name="substitute.pnml">      
+              <configuration>
+                <group id="Comp2">
+                  <property name="B_presence" value="block" />
+                </group>
+              </configuration>
+			</configModel>               
+      <sampletrace compliant="true">B Omega Omega Omega</sampletrace>
+      <sampletrace compliant="false">Omega Omega Omega</sampletrace>
+      <sampletrace compliant="true">Omega Omega A Omega</sampletrace>
+      <sampletrace compliant="false">A Omega B Omega B</sampletrace>
+      <sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+    </answer>
+  </question>
+  <question text="Is it allowed that the trace starts with an activity which is not '$A' or '$B'?">
+    <preconfiguration id="0">
+      <group id="Comp1">
+        <property name="Omega_presence" isSet="false" />
+      </group>
+    </preconfiguration>
+    <answer text="Yes. The trace may start with an activitiy which is not '$A' or '$B'.">
+			<configModel name="substitute.pnml">     
+              <configuration>
+                <group id="Comp1">
+                  <property name="Omega_presence" value="allow" />
+                </group>
+              </configuration>
+			</configModel>                    
+      <sampletrace compliant="true">Omega Omega A Omega</sampletrace>
+      <sampletrace compliant="false">Omega Omega Omega</sampletrace>
+      <sampletrace compliant="true">Omega B Omega Omega</sampletrace>
+      <sampletrace compliant="true">Omega A Omega B Omega</sampletrace>
+    </answer>
+    <answer text="No. The trace may not start with an activitiy which is not '$A' or '$B'.">
+			<configModel name="substitute.pnml">     
+              <configuration>
+                <group id="Comp1">
+                  <property name="Omega_presence" value="block" />
+                </group>
+              </configuration>
+			</configModel>                 
+      <sampletrace compliant="true">B Omega Omega Omega</sampletrace>
+      <sampletrace compliant="false">Omega Omega Omega</sampletrace>
+      <sampletrace compliant="true">A Omega Omega Omega</sampletrace>
+      <sampletrace compliant="false">Omega A Omega B Omega</sampletrace>
+      <sampletrace compliant="true">B Omega A Omega Omega</sampletrace>
+      <sampletrace compliant="false">Omega Omega A Omega</sampletrace>
+      <sampletrace compliant="false">Omega B Omega Omega</sampletrace>
+    </answer>
+  </question>
+</configurablePattern>

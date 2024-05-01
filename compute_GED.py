@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('TkAgg')
 from datetime import datetime
-"""
+
 # convert anonymized xes to pnml
 print("Converting anynomized .xes files to .pnml ...")
 maps = ['data\logs\simple\\tlkc', 'data\logs\simple\pretsacase', 'data\logs\simple\pripel', 'data\logs\complex\\tlkc', 'data\logs\complex\pretsacase', 'data\logs\complex\pripel']
@@ -88,7 +88,7 @@ for folder_path in maps:
             pm4py.write_pnml(petri_net, initial_marking, final_marking, save_path2)
         except:
             this_is_a_folder = 1
-"""
+
 # compute GEDs
 print("Computing GEDs ...")
 log_dir = os.getcwd() + '\CalculateGED' # Directory to store log files

@@ -1,0 +1,685 @@
+<questions>
+	<question text="Choose the type of limitation you would like to exert." id="Q0">
+		<hasActivity name="A"/>
+		<hasActivity name="B"/>
+		<answer text="Dependent Existence.">
+		  <description text="Define whether the occurrence or non-occurrence of an activity imposes an obligation on occurrence or non-occurrence of another activity, e.g., define an inclusive relation between two activities."/>
+			<followUpQuestion id="Q1"/>
+			<sampletrace compliant="true">A A A Omega Omega</sampletrace>
+			<sampletrace compliant="true">Omega B B</sampletrace>
+			<sampletrace compliant="true">A Omega B Omega B B</sampletrace>
+			<sampletrace compliant="true">B Omega A A</sampletrace>
+		</answer>
+		<answer text="Bounded Existence.">
+		  <description text="Define whether number of occurrences of one activity is dependent to number of occurrences of the other activity."/>
+			<followUpQuestion id="Q5"/>
+			<sampletrace compliant="true">A A A B B B</sampletrace>
+			<sampletrace compliant="true">A B A B B A A B</sampletrace>
+		</answer>
+		<answer text="Sequence of Occurrence.">
+		   <description text="Define whether there should be a sequential relation between occurrence of two activities, e.g., define a precedence or simultaneous relation between two activities."/>
+			<followUpQuestion id="Q8"/>
+			<sampletrace compliant="true">A B B B Omega B Omega A B</sampletrace>
+			<sampletrace compliant="true">A A Omega B A Omega A A</sampletrace>
+			<sampletrace compliant="true">A B Omega A B A Omega B</sampletrace>
+		</answer>
+		<answer text="Bounded Sequence of Occurrence.">
+          <description text="Define whether a specified sequence must be repeated."/>		
+			<followUpQuestion id="Q4"/>
+			<sampletrace compliant="true">A B A B Omega A B</sampletrace>
+			<sampletrace compliant="true">Omega A Omega B B B Omega B</sampletrace>
+			<sampletrace compliant="true">A Omega A Omega B B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that both activities '$A' and '$B' be present together?" id="Q1">
+		<hasActivity name="A"/>
+		<hasActivity name="B"/>
+		<answer text="Yes. Both activitiess '$A' and '$B' may be present together.">
+			<followUpQuestion id="Q2"/>
+			<sampletrace compliant="true">A Omega B Omega</sampletrace>
+			<sampletrace compliant="true">Omega A Omega A</sampletrace>
+			<sampletrace compliant="true">B Omega B B</sampletrace>
+		</answer>
+		<answer text="No. Both activitiess '$A' and '$B' must not be present together.">
+			<configModel name="exclusive.pnml">
+			</configModel>
+			<sampletrace compliant="true">Omega B B Omega B</sampletrace>
+			<sampletrace compliant="true">Omega A A Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega A Omega B</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that both activities '$A' and '$B' be absent in a trace?" id="Q2">
+		<answer text="Yes. Both activities '$A' and '$B' may be absent in a trace.">
+			<configModel name="inclusivePrerequisiteCorequisite.pnml">
+			</configModel>
+			<sampletrace compliant="true">Omega Omega A</sampletrace>
+			<sampletrace compliant="true">Omega B B Omega</sampletrace>
+			<sampletrace compliant="true">Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="No. At least one of the activities '$A' or '$B' must occur.">
+			<configModel name="substitute.pnml">
+			</configModel>
+			<sampletrace compliant="true">Omega Omega A</sampletrace>
+			<sampletrace compliant="true">B Omega B Omega</sampletrace>
+			<sampletrace compliant="true">Omega A B Omega</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Is it allowed that both activities occur simultaneously?" id="Q3">
+		<answer text="No. Both activities must not occur simultaneously.">
+			<followUpQuestion id="Q6"/>
+		</answer>
+		<answer text="Yes. Both activities may occur simultaneously.">
+			<followUpQuestion id="Q7"/>
+		</answer>
+	</question>
+	<question text="Please specify the limitation you would like to exert." id="Q4">
+		<hasActivity name="A"/>
+		<hasActivity name="B"/>
+		<answer text="The sequence of activities ('$A' '$B') must occur repetitively.">
+			<configModel name="boundedSequence.pnml">
+				<configuration>
+					<group id="Comp10">
+						<property name="C_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="D_presence" value="skip"/>
+					</group>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp13">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="p_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="Omega_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">B A Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be followed repetetively by activity '$B' .">
+			<configModel name="chainResponse.pnml">
+				<configuration>
+					<group id="Comp5">
+						<property name="C_presence" value="skip"/>
+					</group>
+					<group id="Comp6">
+						<property name="D_presence" value="skip"/>
+					</group>
+					<group id="Comp8">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp9">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp7">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp31">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp32">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp37">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="P1_presence" value="block"/>
+					</group>
+					<group id="Comp35">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp14">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp12">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="D_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp21">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp22">
+						<property name="D_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp4">
+						<property name="B_presence" value="allow"/>
+					</group>
+					<group id="Comp19">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be preceded repetetively by activity '$B' .">
+			<configModel name="chainPrecedence.pnml">
+				<configuration>
+					<group id="Comp27">
+						<property name="C_presence" value="skip"/>
+					</group>
+					<group id="Comp10">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+					<group id="Comp7">
+						<property name="P2_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="P3_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="D_presence" value="skip"/>
+					</group>
+					<group id="Comp28">
+						<property name="P4_presence" value="block"/>
+					</group>
+					<group id="Comp29">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="E_presence" value="skip"/>
+					</group>
+					<group id="Comp31">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp30">
+						<property name="P5_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="F_presence" value="skip"/>
+					</group>
+					<group id="Comp33">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp34">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp35">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp36">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp18">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp17">
+						<property name="E_presence" value="block"/>
+					</group>
+					<group id="Comp16">
+						<property name="D_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp20">
+						<property name="F_presence" value="block"/>
+					</group>
+					<group id="Comp23">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp24">
+						<property name="D_presence" value="block"/>
+					</group>
+					<group id="Comp25">
+						<property name="E_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">B B A</sampletrace>
+			<sampletrace compliant="false">A Omega Omega Omega</sampletrace>
+		</answer>
+	</question>
+	<question text="Define and choose the limitation you would like to exert." id="Q5">
+		<hasActivity name="A"/>
+		<hasActivity name="B"/>
+		<answer text="For any given number of occurrences of activity '$A' there should exist the same number of occurrences of activity '$B'.">
+			<configModel name="coexistence.pnml">
+			</configModel>
+			<sampletrace compliant="true">A Omega A Omega B B A B</sampletrace>
+			<sampletrace compliant="false">A A Omega B Omega</sampletrace>
+		</answer>
+		<answer text="For every activity '$A' there should exist one activity '$B' and for every activity '$B' there should exist one activity '$A'.">
+			<configModel name="oneToOneCoexistence.pnml">
+			</configModel>
+			<sampletrace compliant="true">A Omega B Omega B A A B</sampletrace>
+			<sampletrace compliant="false">A A B B B</sampletrace>
+			<sampletrace compliant="false">A B B B A A</sampletrace>
+		</answer>
+	</question>
+	<question text="Define and choose the limitation you would like to exert." id="Q6">
+		<hasActivity name="A_st"/>
+		<hasActivity name="A_cmp"/>
+		<hasActivity name="B_st"/>
+		<hasActivity name="B_cmp"/>
+		<answer text="Activity ('$A_st' '$A_cmp') must be followed by activity ('$B_st' '$B_cmp').">
+			<configModel name="sequenceAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity ('$A_st' '$A_cmp') must be followed by itself or by activity ('$B_st' '$B_cmp').">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp15">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp A_st A_cmp</sampletrace>
+		</answer>
+		<answer text="Activity ('$B_st' '$B_cmp') must be preceded by activity ('$A_st' '$A_cmp') .">
+			<configModel name="sequenceAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity ('$B_st' '$B_cmp') must be preceded by itself or activity ('$A_st' '$A_cmp').">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp12">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp B_st B_cmp</sampletrace>
+		</answer>
+		<answer text="Activity ('$A_st' '$A_cmp') must not be followed by activity ('$B_st' '$B_cmp').">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+			</configModel>
+			<sampletrace compliant="true">A_st A_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp B_st B_cmp Omega</sampletrace>
+		</answer>
+		<answer text="Activity ('$B_st' '$B_cmp') must not be preceded by activity ('$A_st' '$A_cmp').">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+			</configModel>
+			<sampletrace compliant="true">B_st B_cmp Omega Omega</sampletrace>
+			<sampletrace compliant="false">A_st A_cmp B_st B_cmp Omega</sampletrace>
+		</answer>
+		<answer text="Activity ('$B_st' '$B_cmp') must not be executed during activity ('$A_st' '$A_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">B_st B_cmp A_st A_cmp</sampletrace>
+			<sampletrace compliant="false">A_st B_st B_cmp A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+		</answer>
+		<answer text="Activity ('$A_st' '$A_cmp') and ('$B_st' '$B_cmp') must not be executed at the same time.">
+			<configModel name="parallelSimultaneous.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="Omega_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="AB_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">B_st B_cmp A_st A_cmp</sampletrace>
+			<sampletrace compliant="false">B_st A_st B_cmp A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">A_st B_st A_cmp B_cmp</sampletrace>
+		</answer>
+		<answer text="At least one other activity must occur between occurrences of the activities ('$A_st' '$A_cmp') and ('$B_st' 'B_cmp').">
+			<configModel name="otherActivityInBetween.pnml">
+			</configModel>
+			<sampletrace compliant="true">B_st B_cmp Omega A_st A_cmp Omega</sampletrace>
+			<sampletrace compliant="false">A_st Omega A_cmp B_st B_cmp Omega</sampletrace>
+			<sampletrace compliant="true">Omega A_st Omega A_cmp Omega B_st B_smp</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp A_st Omega A_cmp Omeg</sampletrace>
+		</answer>
+	</question>
+	<question text="Define and choose the limitation you would like to exert." id="Q7">
+		<hasActivity name="A_st"/>
+		<hasActivity name="A_cmp"/>
+		<hasActivity name="B_st"/>
+		<hasActivity name="B_cmp"/>
+		<answer text="Activity ('$A_st' '$A_cmp') must be followed by activity ('$B_st' '$B_cmp') or both activities may be executed simultaneously.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="P7_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="P14_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="P8_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st B_st A_cmp B_cmp</sampletrace>
+			<sampletrace compliant="false">Omega Omega A_st A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false"> B_st B_cmp B_st B_cmp A_st A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st B_st B_cmp A_cmp</sampletrace>
+			<sampletrace compliant="false">A_st B_st B_cmp B_st B_cmp A_cmp</sampletrace>
+		</answer>
+		<answer text="Activity ('$B_st' '$B_cmp') must be preceded by activity ('$A_st' '$A_cmp') or both activities may be executed simultaneously.">
+			<configModel name="parallelSequenceNonAtomic.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="P7_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="P14_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="P8_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st B_st A_cmp B_cmp</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp A_st A_cmp</sampletrace>
+			<sampletrace compliant="true">A_st A_cmp B_st B_cmp</sampletrace>
+			<sampletrace compliant="false">Omega Omega B_st B_cmp</sampletrace>
+			<sampletrace compliant="true">A_st B_st B_cmp A_cmp</sampletrace>
+			<sampletrace compliant="false">A_st B_st B_cmp B_st B_cmp A_cmp</sampletrace>
+		</answer>
+		<answer text="Activity ('$B_st' - '$B_cmp') must be executed during activity ('$A_st' - '$A_cmp').">
+			<configModel name="parallelDuring.pnml">
+				<configuration>
+					<group id="Comp6">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp1">
+						<property name="B_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st B_st B_cmp A_cmp</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp A_st A_cmp</sampletrace>
+		</answer>
+		<answer text="Activity ('$A_st' - '$A_cmp') and ('$B_st' - '$B_cmp') must be executed at the same time.">
+			<configModel name="parallelSimultaneous.pnml">
+				<configuration>
+					<group id="Comp2">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp3">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp6">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A_st B_st A_cmp B_cmp</sampletrace>
+			<sampletrace compliant="false"> A_st A_cmp Omega B_st B_cmp</sampletrace>
+			<sampletrace compliant="true">A_st B_st B_cmp A_cmp</sampletrace>
+			<sampletrace compliant="false">B_st B_cmp A_st A_cmp</sampletrace>
+		</answer>
+	</question>
+	<question text="Are the activities you would like to restrict structured or atomic? " id="Q8">
+		<answer text="The activities I would like to restrict are structured.">
+			<followUpQuestion id="Q3"/>
+		</answer>
+		<answer text="The activities I would like to restrict are atomic.">
+			<followUpQuestion id="Q9"/>
+		</answer>
+	</question>
+	<question text="Please specify the limitation you would like to exert." id="Q9">
+		<hasActivity name="A"/>
+		<hasActivity name="B"/>
+		<answer text="Activity '$A' must be followed by activity '$B'.">
+			<configModel name="sequenceAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp3">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp8">
+						<property name="B_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must be followed by itself or by activity '$B'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp9">
+						<property name="Tau_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp11">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp5">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="C_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">A Omega Omega</sampletrace>
+			<sampletrace compliant="true">A A A B</sampletrace>
+			<sampletrace compliant="false">A A A</sampletrace>
+		</answer>
+		<answer text="Activity '$B' must be preceded by activity '$A'.">
+			<configModel name="sequenceAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp4">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp7">
+						<property name="A_presence" value="block"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$B' must be preceded by itself or activity '$A'.">
+			<configModel name="sequenceMultipleAtomicActivities.pnml">
+				<configuration>
+					<group id="Comp12">
+						<property name="B_presence" value="block"/>
+					</group>
+					<group id="Comp10">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp4">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp2">
+						<property name="C_presence" value="block"/>
+					</group>
+					<group id="Comp13">
+						<property name="A_presence" value="block"/>
+					</group>
+					<group id="Comp9">
+						<property name="Tau_presence" value="allow"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">A B</sampletrace>
+			<sampletrace compliant="false">B Omega Omega</sampletrace>
+			<sampletrace compliant="true">A B B B</sampletrace>
+			<sampletrace compliant="false">B B B</sampletrace>
+		</answer>
+		<answer text="Activity '$A' must not be followed by activity '$B'.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+			</configModel>
+			<sampletrace compliant="true">A Omega Omega</sampletrace>
+			<sampletrace compliant="false">A B Omega</sampletrace>
+		</answer>
+		<answer text="Activity '$B' must not be preceded by activity '$A'.">
+			<configModel name="negativePrecedenceOrFollowance.pnml">
+			</configModel>
+			<sampletrace compliant="true">B Omega Omega</sampletrace>
+			<sampletrace compliant="false">A B Omega</sampletrace>
+		</answer>
+		<answer text="At least one other activity must occur between occurrences of the activities '$A' and '$B'.">
+			<configModel name="otherActivityInBetween.pnml">
+			</configModel>
+			<sampletrace compliant="true">B B Omega A A A Omega</sampletrace>
+			<sampletrace compliant="false">A B Omega</sampletrace>
+			<sampletrace compliant="true">Omega A Omega B B Omega A Omega A Omega</sampletrace>
+			<sampletrace compliant="false">B A Omega A Omega B</sampletrace>
+		</answer>
+	</question>
+</questions>

@@ -1,0 +1,33 @@
+<configurablePattern>
+	<hasActivity name= "A"/>
+	<question text="Please specify the number of cycles that activity '$A' is allowed to occur ." id="0">
+		<hasParameter name="n"/>
+		<inheritedParameter name="k" constraint = "isSet"/>
+		<preconfiguration id="0">
+			<group id="Comp1">
+				<property name="p_tokens" isSet="false"/>
+			</group>
+			<group id="Comp3">
+				<property name="p_tokens" isSet="true"/>
+			</group>
+			<group id="Comp4">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+			<group id="Comp5">
+				<property name="Arc_weight" isSet="true"/>
+			</group>
+		</preconfiguration>
+		<answer text="Activity '$A' must occur in '$n' cycles of '$k' occurrences .">
+			<configModel name="cyclicOccurrence.pnml">
+				<configuration>
+					<group id="Comp1">
+						<property name="p_tokens" value="n"/>
+					</group>
+				</configuration>
+			</configModel>
+			<sampletrace compliant="true">n*(Omega k*(A))</sampletrace>
+			<sampletrace compliant="false">Omega Omega Omega</sampletrace>
+			<sampletrace compliant="false">Omega (k-1)*(A) Omega (k+1)*(A)</sampletrace>
+		</answer>
+	</question>
+</configurablePattern>
