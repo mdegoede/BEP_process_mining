@@ -114,6 +114,8 @@ for path in log_paths:
                 logzsize = "_1000"
             elif "_5000" in file:
                 logzsize = "_5000"
+            elif "_100" in file:
+                logzsize = "_100"
             if "simple" in path:
                 if "XORANDLOOPSKIP" in path:
                     base_file = "XORANDLOOPSKIP1" + logzsize
@@ -138,8 +140,8 @@ for path in log_paths:
 
             for a_value1, a_value2 in a_pairs:
                 print(a_value1, a_value2)
-                run_ged(a_value1, a_value2, log_dir)
-                print(a_value1, a_value2, "Done")
+                #run_ged(a_value1, a_value2, log_dir)
+                #print(a_value1, a_value2, "Done")
                 log_file = os.path.join(log_dir, f"{a_value1}-{a_value2}.ged.log")
                 ged_value = extract_ged_value(log_file)
                 if ged_value is not None:
@@ -147,12 +149,9 @@ for path in log_paths:
 
 index = pd.MultiIndex.from_tuples(ged_values.keys(), names=['a_value1', 'a_value2'])
 df = pd.DataFrame(list(ged_values.values()), index=index, columns=['ged_value'])
+if os.path.basename(os.getcwd()) == "CalculateGED":
+    os.chdir("..")
 df.to_csv('CalculateGED\geds\geds_df.csv')
-
-df = pd.read_csv('CalculateGED\geds\geds_df.csv')
-df = df.set_index(['a_value1', 'a_value2'])
-df = df.sort_index(level=0)
-print(df)
 
 # slpit df per privacy method
 mask_tlkc = df.index.get_level_values('a_value2').str.contains('tlkc', case=False, na=False)
@@ -166,7 +165,7 @@ df_pretsa = df[mask_pretsa]
 algos = [df_pretsa, df_tlkc, df_pripel]
 df_names = ["pretsa", "tlkc", "pripel"]
 custom_setting_order = ["weak", "average", "strong"]
-custom_complexity_order = ["XOR1", "XOR2", "XOR+AND1", "XOR+AND2", "XOR+AND+LOOP1", "XOR+AND+LOOP2", "XOR+AND+LOOP+SKIP1", "XOR+AND+LOOP+SKIP2"]
+custom_complexity_order = ["XOR1", "XOR2", "XOR+AND2", "XOR+AND+LOOP1", "XOR+AND+LOOP2", "XOR+AND+LOOP+SKIP1", "XOR+AND+LOOP+SKIP2"]
 
 for df, df_name in zip(algos, df_names):
     a_value2_series = pd.Series(df.index.get_level_values('a_value2'))

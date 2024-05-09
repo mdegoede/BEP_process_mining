@@ -42,6 +42,8 @@ def get_logsize(value):
         return "1000"
     elif "_5000_" in value:
         return "5000"
+    elif "_100" in value:
+        return "100"
     else:
         print('no logsize', value)
 

@@ -1,12 +1,12 @@
 import pm4py
 
-path = "D:\CalculateGED2\XORANDLOOP2_1000_L_6_C_0.2_K_80_K2_0.9_T_hours_bk_type_set_TLKC_anonymized.pnml"
+path = "D:\CalculateGED2\XORANDLOOP1_100_L_6_C_0.2_K_80_K2_0.9_T_hours_bk_type_set_TLKC_anonymized.pnml"
 pn, im, fm = pm4py.read_pnml(path)
 pm4py.view_petri_net(pn, im, fm, format='svg')
 
-path = "D:\CalculateGED2\XORANDLOOP2_5000.pnml"
+path = "D:\CalculateGED2\XORANDLOOPSKIP2_100.pnml"
 pn, im, fm = pm4py.read_pnml(path)
-pm4py.view_petri_net(pn, im, fm, format='svg')
+#pm4py.view_petri_net(pn, im, fm, format='svg')
 
 path = "D:\manyPPPM_nets\discovered\simple\XOR\XOR1000.pnml"
 pn, im, fm = pm4py.read_pnml(path)
