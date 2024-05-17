@@ -4,7 +4,7 @@ Repository for the experiments described in "Analyzing Privacy Preservation Tech
 
 ## Overview
 
-- [Paper Details](#Paper Details)
+- [Paper Details](#PaperDetails)
   - [Summary](#Summary)
   - [Reproduction](#Reproduction)
   - [Dependencies](#Dependencies)
