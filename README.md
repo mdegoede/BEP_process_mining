@@ -1,16 +1,14 @@
 # Analyzing Privacy Preservation Techniques for Process Mining: Measuring Result Utility Across Different Event Log Dependency Types and Log sizes
 
-Repository for the experiments described in "Analyzing Privacy Preservation Techniques for Process Mining: Measuring Result Utility Across Different Event Log Dependency Types and Log sizes", executed as Bachelor End Project for the Bachelor Data Science form the Technical University of Eindhoven. 
+Repository for the experiments described in "Analyzing Privacy Preservation Techniques for Process Mining: Measuring Result Utility Across Different Event Log Dependency Types and Log sizes", executed as Bachelor End Project for the Bachelor Data Science form the Technical University of Eindhoven.
 
 ## Overview
 
-- [Paper Details](#PaperDetails)
+- [Paper Details](#Paper Details)
   - [Summary](#Summary)
   - [Reproduction](#Reproduction)
   - [Dependencies](#Dependencies)
 - [Extensions](#Extensions)
-  - [Adding Data](#AddingData)
-  - [Changing Classifiers](#ChangingClassifiers)
 
 ## Paper Details
 
@@ -54,6 +52,13 @@ diffprivlib       0.6.4
 matplotlib        3.8.4
 seaborn           0.13.2
 ```
+
+This code also makes use of existing git-repositories that were made publicly available, namely:
+- TLKC-Privacy: the original repository can be found at https://github.com/m4jidRafiei/TLKC-Privacy.git and is protected under the GNU General Public License v3.0. This repository is stored as 'tlkc' in the current repository. 
+- PRIPEL: the original repository can be found at https://github.com/samadeusfp/PRIPEL.git and is protected under the MIT License. This repository is stored as 'PRIPEL_master' in the current repository. 
+- pm4py-core: the original repository can be found at https://github.com/pm4py/pm4py-core.git and is proteted under the GNU General Public License v3.0. This repository is stored as 'pm4yp_copy' in the current repository. 
+
+The code from these repositories was minimally modified to allow for automated repeating of the algorithms, specific parameter settings, and storing the results in the correct location. These changes are made in the 'anonymize.py' file, there the privacy-preserving algorithms are applied. Other changes are some of the import statements, changing 'import factory' to e.g. 'import importer'. 
 
 ## Extensions
 
