@@ -5,7 +5,6 @@ import pm4py
 
 from tlkc.tlkc import privacyPreserving
 from tlkc.pretsa_case import *
-#from PRIPEL_master.PRIPEL_master.pripel import *
 
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
 from pm4py.objects.log.importer.xes import importer as xes_import_factory
@@ -18,10 +17,10 @@ from PRIPEL_master.PRIPEL_master.tracematcher import TraceMatcher as TraceMatche
 
 import time
 import threading
-"""
+
 # run presacase
 print("PRETSAcase is running ...")
-for folder_path in ['data2\logs\simple', 'data2\logs\complex']: ###
+for folder_path in ['data\logs\simple', 'data\logs\complex']:
     files = os.listdir(folder_path)
     for file in files:
         try:
@@ -50,10 +49,10 @@ for folder_path in ['data2\logs\simple', 'data2\logs\complex']: ###
                     print(privacy_aware_log_path + " has been exported!")
         except:
             this_is_a_folder = 1
-"""
+
 # run tlkc
 print("TLKC is running ...")
-for folder_path in ['data2\logs\simple', 'data2\logs\complex']: ###
+for folder_path in ['data\logs\simple', 'data\logs\complex']:
     files = os.listdir(folder_path)
     for file in files:
         print(file)
@@ -107,66 +106,64 @@ def freq(lst):
             d[i] = 1
     return d
 
-for folder_path in ['data2\logs\simple', 'data2\logs\complex']: ###
+for folder_path in ['data\logs\simple', 'data\logs\complex']:
     files = os.listdir(folder_path)
     for file in files:
-        if "XORANDLOOPSKIP2_1000" not in file:
-            try:
-                print(file)
-                path = os.path.join(folder_path, file)
-                log_path = path
+        try:
+            print(file)
+            path = os.path.join(folder_path, file)
+            log_path = path
+            log = xes_import_factory.apply(log_path)
+            df = xes_converter.apply(log, variant=xes_converter.Variants.TO_DATA_FRAME)
+            grouped_by_case_size = df.groupby('case:concept:name').size()
+            N = grouped_by_case_size.quantile(0.95)
+            N = int(N)
+            epsilons = [1.5, 1.0, 0.5]
+            for epsilon in epsilons:
+                print(epsilon)
+                epsilon = float(epsilon) # strength of the guarantee, lower values leading to stronger data protection.
+                #N = int(30) # covers 95% of trace lengths
+                k = int(1)
+
+                starttime = datetime.datetime.now()
                 log = xes_import_factory.apply(log_path)
-                df = xes_converter.apply(log, variant=xes_converter.Variants.TO_DATA_FRAME)
-                grouped_by_case_size = df.groupby('case:concept:name').size()
-                N = grouped_by_case_size.quantile(0.95)
-                N = int(N)
-                epsilons = [1.5, 1.0, 0.5]
-                #epsilons = [1.5, 1.0, 0.5] ###
-                for epsilon in epsilons:
-                    print(epsilon)
-                    epsilon = float(epsilon) # strength of the guarantee, lower values leading to stronger data protection.
-                    #N = int(30) # covers 95% of trace lengths
-                    k = int(1)
 
-                    starttime = datetime.datetime.now()
-                    log = xes_import_factory.apply(log_path)
+                while True:
+                    # run the query in a separate thread
+                    query_thread = threading.Thread(target=run_query)
+                    query_thread.start()
+                    query_thread.join(max_query_iteration_time.total_seconds())
 
-                    while True:
-                        # run the query in a separate thread
-                        query_thread = threading.Thread(target=run_query)
-                        query_thread.start()
-                        query_thread.join(max_query_iteration_time.total_seconds())
+                    # if the thread is still alive, it means it's taking too long, terminate it
+                    if query_thread.is_alive():
+                        print("new k", k+1)
+                        k += 1  # increase k for the next iteration
+                    else:
+                        endtime_tv_query = datetime.datetime.now()
+                        break  # exit the loop if the query completes within the time limit
 
-                        # if the thread is still alive, it means it's taking too long, terminate it
-                        if query_thread.is_alive():
-                            print("new k", k+1)
-                            k += 1  # increase k for the next iteration
-                        else:
-                            endtime_tv_query = datetime.datetime.now()
-                            break  # exit the loop if the query completes within the time limit
-
-                    filename = file.replace('.xes', '')
-                    new_ending = "/pripel/" + str(filename) + "_epsilon_" + str(epsilon) + "_k_" + str(k) + "_N_" + str(N) + "_pripel_anonymized.xes"
-                    result_log_path = log_path.replace(file, new_ending)
-                    print("Time of TV Query: " + str((endtime_tv_query - starttime_tv_query)))
-                    starttime_trace_matcher = datetime.datetime.now()
-                    traceMatcher = TraceMatcher(tv_query_log, log)
-                    matchedLog = traceMatcher.matchQueryToLog()
-                    print(len(matchedLog))
-                    endtime_trace_matcher = datetime.datetime.now()
-                    print("Time of TraceMatcher: " + str((endtime_trace_matcher - starttime_trace_matcher)))
-                    distributionOfAttributes = traceMatcher.getAttributeDistribution()
-                    occurredTimestamps, occurredTimestampDifferences = traceMatcher.getTimeStampData()
-                    print(min(occurredTimestamps))
-                    starttime_attribute_anonymizer = datetime.datetime.now()
-                    attributeAnonymizer = AttributeAnonymizer()
-                    anonymizedLog, attributeDistribution = attributeAnonymizer.anonymize(matchedLog, distributionOfAttributes, epsilon,
-                                                                                                                 occurredTimestampDifferences, occurredTimestamps)
-                    endtime_attribute_anonymizer = datetime.datetime.now()
-                    print("Time of attribute anonymizer: " + str(endtime_attribute_anonymizer - starttime_attribute_anonymizer))
-                    xes_exporter.apply(anonymizedLog, result_log_path)
-                    endtime = datetime.datetime.now()
-                    print(result_log_path)
-                    print(freq(attributeDistribution))
-            except:
-                this_is_a_folder = 1
+                filename = file.replace('.xes', '')
+                new_ending = "/pripel/" + str(filename) + "_epsilon_" + str(epsilon) + "_k_" + str(k) + "_N_" + str(N) + "_pripel_anonymized.xes"
+                result_log_path = log_path.replace(file, new_ending)
+                print("Time of TV Query: " + str((endtime_tv_query - starttime_tv_query)))
+                starttime_trace_matcher = datetime.datetime.now()
+                traceMatcher = TraceMatcher(tv_query_log, log)
+                matchedLog = traceMatcher.matchQueryToLog()
+                print(len(matchedLog))
+                endtime_trace_matcher = datetime.datetime.now()
+                print("Time of TraceMatcher: " + str((endtime_trace_matcher - starttime_trace_matcher)))
+                distributionOfAttributes = traceMatcher.getAttributeDistribution()
+                occurredTimestamps, occurredTimestampDifferences = traceMatcher.getTimeStampData()
+                print(min(occurredTimestamps))
+                starttime_attribute_anonymizer = datetime.datetime.now()
+                attributeAnonymizer = AttributeAnonymizer()
+                anonymizedLog, attributeDistribution = attributeAnonymizer.anonymize(matchedLog, distributionOfAttributes, epsilon,
+                                                                                                                     occurredTimestampDifferences, occurredTimestamps)
+                endtime_attribute_anonymizer = datetime.datetime.now()
+                print("Time of attribute anonymizer: " + str(endtime_attribute_anonymizer - starttime_attribute_anonymizer))
+                xes_exporter.apply(anonymizedLog, result_log_path)
+                endtime = datetime.datetime.now()
+                print(result_log_path)
+                print(freq(attributeDistribution))
+        except:
+            this_is_a_folder = 1

@@ -5,16 +5,15 @@ from compare_for_GED.analyze_geds import *
 from matplotlib.colors import LinearSegmentedColormap
 
 gen_values = {}
-#maps = ['data\logs\simple\\tlkc', 'data\logs\simple\pretsacase', 'data\logs\simple\pripel', 'data\logs\complex\\tlkc', 'data\logs\complex\pretsacase', 'data\logs\complex\pripel']
-maps = ['D:/for_now\simple\\tlkc', 'D:/for_now\simple\pretsacase', 'D:/for_now\simple\pripel', 'D:/for_now\complex\\tlkc', 'D:/for_now\complex\pretsacase', 'D:/for_now\complex\pripel']
+maps = ['data\logs\simple\\tlkc', 'data\logs\simple\pretsacase', 'data\logs\simple\pripel', 'data\logs\complex\\tlkc', 'data\logs\complex\pretsacase', 'data\logs\complex\pripel']
 for folder_path in maps:
-    if folder_path == 'D:/for_now\simple\\tlkc' or folder_path == 'D:/for_now\complex\\tlkc':
+    if folder_path == 'data/for_now\simple\\tlkc' or folder_path == 'data/for_now\complex\\tlkc':
         name = "\\tlkc"
         name2 = "tlkc"
-    if folder_path == 'D:/for_now\simple\pretsacase' or folder_path == 'D:/for_now\complex\pretsacase':
+    if folder_path == 'data/for_now\simple\pretsacase' or folder_path == 'data/for_now\complex\pretsacase':
         name = "\pretsacase"
         name2 = "pretsacase"
-    if folder_path == 'D:/for_now\simple\pripel' or folder_path == 'D:/for_now\complex\pripel':
+    if folder_path == 'data/for_now\simple\pripel' or folder_path == 'data/for_now\complex\pripel':
         name = "\pripel"
         name2 = "pripel"
 
@@ -34,8 +33,7 @@ for folder_path in maps:
 
         # retrieve the respective privacy aware petri net
         save_path = path
-        #save_path = save_path.replace("logs", "pnml_nets")
-        save_path = save_path.replace("for_now", "PPPM_nets")
+        save_path = save_path.replace("logs", "pnml_nets")
         save_path = save_path.replace(str(name2), str(dest) + str(name), 1)
         save_path = save_path.replace(".xes", ".pnml")
         privacy_pn, im, fm = pm4py.read_pnml(save_path)
@@ -45,6 +43,8 @@ for folder_path in maps:
             logzsize = "_1000"
         elif "_5000" in file:
             logzsize = "_5000"
+        elif "_100" in file:
+            logzsize = "_100"
         if "simple" in path:
             comp = "simple"
             if "XORANDLOOPSKIP" in path:
@@ -68,8 +68,7 @@ for folder_path in maps:
         original_file = "data/logs/" + comp + "/" + base_file + ".xes"
         original_log = pm4py.read_xes(original_file)
 
-        #original_path = "data/pnml_nets/" + comp + "/" + base_file + ".pnml"
-        original_path = "D:/manyPPPM_nets/discovered/" + comp + "/" + base_file + ".pnml"
+        original_path = "data/pnml_nets/" + comp + "/" + base_file + ".pnml"
         original_pn, im, fm = pm4py.read_pnml(original_path)
 
         # generalization for privatized pnml and original pnml
@@ -157,7 +156,7 @@ for df, df_name in zip(algos, df_names):
         structure = print_multiindex_structure(df_multi.index)
         reversed_cmap = plt.cm.YlGnBu.reversed()
         sns.heatmap(df_multi, annot=True, cmap=reversed_cmap, fmt=".3f", linewidths=.5, cbar=True)
-        plt.title(f'Generalization values for {title_name} ({part})')
+        plt.title(f'Precision values for {title_name} ({part})')
         plt.yticks(ticks=np.arange(len(structure))+0.5, labels=structure, rotation=0)  # Align to center vertically
         plt.xticks(ticks=np.arange(len(custom_complexity_order))+0.5, labels=custom_complexity_order, rotation=45, ha="right", rotation_mode="anchor")
         plt.xlabel('Dependency Pattern')

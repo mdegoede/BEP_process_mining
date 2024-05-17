@@ -4,11 +4,11 @@ from pm4py.objects.log.importer.xes import importer as xes_importer
 import pandas as pd
 
 # Define the directory paths for simple and complex logs
-simple_logs_dir = "D:/logs/simple"
-complex_logs_dir = "D:/logs/complex"
+simple_logs_dir = "data\logs\simple"
+complex_logs_dir = "data\logs\complex"
 
 # Define the different log sizes
-log_sizes = [1000, 5000, 10000]
+log_sizes = [100, 1000, 5000]
 
 # Define a function to process XES files and gather evaluation metrics
 def process_logs(logs_dir, log_size):
@@ -33,7 +33,7 @@ def process_logs(logs_dir, log_size):
                 "Max Nr Traces per Variant": variant_counts.max(),
                 "Min Nr Traces per Variant": variant_counts.min(),
                 "Mean Nr Traces per Variant": variant_counts.mean(),
-                "N-Value for Pripel": grouped_by_case_size.quantile(0.95)
+                #"N-Value for Pripel": grouped_by_case_size.quantile(0.95)
             }
             metrics_list.append(metrics)
     return metrics_list
