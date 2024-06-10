@@ -7,13 +7,13 @@ from matplotlib.colors import LinearSegmentedColormap
 gen_values = {}
 maps = ['data\logs\simple\\tlkc', 'data\logs\simple\pretsacase', 'data\logs\simple\pripel', 'data\logs\complex\\tlkc', 'data\logs\complex\pretsacase', 'data\logs\complex\pripel']
 for folder_path in maps:
-    if folder_path == 'data/for_now\simple\\tlkc' or folder_path == 'data/for_now\complex\\tlkc':
+    if folder_path == 'data\logs\simple\\tlkc' or folder_path == 'data\logs\complex\\tlkc':
         name = "\\tlkc"
         name2 = "tlkc"
-    if folder_path == 'data/for_now\simple\pretsacase' or folder_path == 'data/for_now\complex\pretsacase':
+    if folder_path == 'data\logs\simple\pretsacase' or folder_path == 'data\logs\complex\pretsacase':
         name = "\pretsacase"
         name2 = "pretsacase"
-    if folder_path == 'data/for_now\simple\pripel' or folder_path == 'data/for_now\complex\pripel':
+    if folder_path == 'data\logs\simple\pripel' or folder_path == 'data\logs\complex\pripel':
         name = "\pripel"
         name2 = "pripel"
 
@@ -102,6 +102,8 @@ df_names = ["pretsa", "tlkc", "pripel"]
 custom_setting_order = ["weak", "average", "strong"]
 custom_complexity_order = ["XOR1", "XOR+AND1", "XOR+AND+LOOP1", "XOR+AND+LOOP+SKIP1", "XOR2", "XOR+AND2", "XOR+AND+LOOP2", "XOR+AND+LOOP+SKIP2"]
 val = ['gen_priv', 'gen_original', 'gen_difference']
+min_val = min(df_pretsa['gen_difference'].min(), df_tlkc['gen_difference'].min(), df_pripel['gen_difference'].min())
+max_val = max(df_pretsa['gen_difference'].max(), df_tlkc['gen_difference'].max(), df_pripel['gen_difference'].max())
 
 for df, df_name in zip(algos, df_names):
     for value in val:
