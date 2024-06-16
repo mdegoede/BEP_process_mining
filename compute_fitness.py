@@ -36,55 +36,58 @@ for folder_path in maps:
         save_path = save_path.replace("logs", "pnml_nets")
         save_path = save_path.replace(str(name2), str(dest) + str(name), 1)
         save_path = save_path.replace(".xes", ".pnml")
-        privacy_pn, im, fm = pm4py.read_pnml(save_path)
+        try:
+            privacy_pn, imp, fmp = pm4py.read_pnml(save_path)
 
-        # retrieve the respective original xes file and petri net
-        if "_1000" in file:
-            logzsize = "_1000"
-        elif "_5000" in file:
-            logzsize = "_5000"
-        elif "_100" in file:
-            logzsize = "_100"
-        if "simple" in path:
-            comp = "simple"
-            if "XORANDLOOPSKIP" in path:
-                base_file = "XORANDLOOPSKIP1" + logzsize
-            elif "XORANDLOOP" in path:
-                base_file = "XORANDLOOP1" + logzsize
-            elif "XORAND" in path:
-                base_file = "XORAND1" + logzsize
-            elif "XOR" in path:
-                base_file = "XOR1" + logzsize
-        elif "complex" in path:
-            comp = "complex"
-            if "XORANDLOOPSKIP" in path:
-                base_file = "XORANDLOOPSKIP2" + logzsize
-            elif "XORANDLOOP" in path:
-                base_file = "XORANDLOOP2" + logzsize
-            elif "XORAND" in path:
-                base_file = "XORAND2" + logzsize
-            elif "XOR" in path:
-                base_file = "XOR2" + logzsize
-        original_file = "data/logs/" + comp + "/" + base_file + ".xes"
-        original_log = pm4py.read_xes(original_file)
+            # retrieve the respective original xes file and petri net
+            if "_1000" in file:
+                logzsize = "_1000"
+            elif "_5000" in file:
+                logzsize = "_5000"
+            elif "_100" in file:
+                logzsize = "_100"
+            if "simple" in path:
+                comp = "simple"
+                if "XORANDLOOPSKIP" in path:
+                    base_file = "XORANDLOOPSKIP1" + logzsize
+                elif "XORANDLOOP" in path:
+                    base_file = "XORANDLOOP1" + logzsize
+                elif "XORAND" in path:
+                    base_file = "XORAND1" + logzsize
+                elif "XOR" in path:
+                    base_file = "XOR1" + logzsize
+            elif "complex" in path:
+                comp = "complex"
+                if "XORANDLOOPSKIP" in path:
+                    base_file = "XORANDLOOPSKIP2" + logzsize
+                elif "XORANDLOOP" in path:
+                    base_file = "XORANDLOOP2" + logzsize
+                elif "XORAND" in path:
+                    base_file = "XORAND2" + logzsize
+                elif "XOR" in path:
+                    base_file = "XOR2" + logzsize
+            original_file = "data/logs/" + comp + "/" + base_file + ".xes"
+            original_log = pm4py.read_xes(original_file)
 
-        original_path = "data/pnml_nets/" + comp + "/" + base_file + ".pnml"
-        original_pn, im, fm = pm4py.read_pnml(original_path)
+            original_path = "data/pnml_nets/" + comp + "/" + base_file + ".pnml"
+            original_pn, im, fm = pm4py.read_pnml(original_path)
 
-        # generalization for privatized pnml and original pnml
-        gen_priv = pm4py.fitness_token_based_replay(original_log, privacy_pn, im, fm)
-        gen_original = pm4py.fitness_token_based_replay(original_log, original_pn, im, fm)
+            # generalization for privatized pnml and original pnml
+            gen_priv = pm4py.fitness_token_based_replay(original_log, privacy_pn, imp, fmp)
+            gen_original = pm4py.fitness_token_based_replay(original_log, original_pn, im, fm)
 
-        print(gen_priv['log_fitness'], gen_original['log_fitness'], gen_original['log_fitness']-gen_priv['log_fitness'])
-        gen_value = (gen_priv['log_fitness'], gen_original['log_fitness'], gen_original['log_fitness']-gen_priv['log_fitness'])
-        gen_values[(base_file, file)] = gen_value
+            print(gen_priv['log_fitness'], gen_original['log_fitness'], gen_original['log_fitness']-gen_priv['log_fitness'])
+            gen_value = (gen_priv['log_fitness'], gen_original['log_fitness'], gen_original['log_fitness']-gen_priv['log_fitness'])
+            gen_values[(base_file, file)] = gen_value
+        except:
+            one=0
 
 index = pd.MultiIndex.from_tuples(gen_values.keys(), names=['base_file', 'file'])
 df = pd.DataFrame(list(gen_values.values()), index=index, columns=['gen_priv', 'gen_original', 'gen_difference'])
 df.to_csv('CalculateGED\conformance_results/fit_df.csv')
 
-df = pd.read_csv('CalculateGED\conformance_results/fit_df.csv')
-df = df.set_index(['base_file', 'file'])
+#df = pd.read_csv('CalculateGED\conformance_results/fit_df.csv')
+#df = df.set_index(['base_file', 'file'])
 df = df.sort_index(level=0)
 print(df)
 
@@ -96,7 +99,7 @@ df_tlkc = df[mask_tlkc]
 df_pripel = df[mask_pripel]
 df_pretsa = df[mask_pretsa]
 
-# visualize GED values
+# visualize recall values
 algos = [df_pretsa, df_tlkc, df_pripel]
 df_names = ["pretsa", "tlkc", "pripel"]
 custom_setting_order = ["weak", "average", "strong"]
